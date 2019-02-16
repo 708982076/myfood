@@ -1,3 +1,5 @@
+import { baseURL } from '../../config'
+
 export const getStorage = (prop) => {
   if (!prop) return
   return JSON.parse(localStorage.getItem(prop)) || []
@@ -31,6 +33,7 @@ export function debounce(func, delay) {
   }
 }
 export const request = async (url, data = {}, method = 'GET') => {
+  url = baseURL + url;
   method = method.toUpperCase();
   if (method === 'GET') {
     let dataUrl = '';
