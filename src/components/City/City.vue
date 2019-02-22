@@ -93,8 +93,8 @@
 
 <script>
 import Header from '../Header/Header'
-import { getStorage, setStorage } from '../../config/utils.js'
-import { getHotCity, getallCity} from '../../../getData'
+import { getStorage, setStorage } from 'lib/utils'
+import { getHotCity, getallCity} from 'root/getData'
 import { mapState, mapActions, mapMutations, mapGetters} from 'vuex'
 
 export default {

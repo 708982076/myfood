@@ -47,7 +47,7 @@
 import BS from "better-scroll";
 import ShopCart from "../ShopCart/ShopCart";
 import CartControl from "../CartControl/CartControl";
-import {getSellerFoodList} from '../../../getData'
+import {getSellerFoodList} from 'root/getData'
 import { mapMutations, mapState } from 'vuex'
 export default {
   props: {

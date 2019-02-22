@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-import './config/rem'
+import 'lib/rem'
 
 Vue.config.productionTip = false
 

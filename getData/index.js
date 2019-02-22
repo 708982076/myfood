@@ -1,5 +1,5 @@
 import Ojsonp from 'jsonp'
-import { request } from '@/config/utils';
+import { request } from 'lib/utils';
 
 export const getHotCity = () => request('/hotCity')
 export const getallCity = () => request('/allCity')

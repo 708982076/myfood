@@ -1,4 +1,4 @@
-import { getCurrentCity } from '../../getData'
+import { getCurrentCity } from 'root/getData'
 import { GET_CURCITY } from './mutation-types'
  
 export default {

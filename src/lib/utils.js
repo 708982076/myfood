@@ -1,5 +1,4 @@
-import { baseURL } from '../../config'
-
+import { baseURL } from 'root/config'
 export const getStorage = (prop) => {
   if (!prop) return
   return JSON.parse(localStorage.getItem(prop)) || []
@@ -104,3 +103,33 @@ export const request = async (url, data = {}, method = 'GET') => {
 		})
   }
 } 
+export const cookieUtils = {
+  getCookie(key) {
+    const cookie = document.cookie;
+    const aCookie = cookie.split(';');
+    aCookie.forEach(item => {
+      const [ k, v ] = item.split("=");
+      if (key === k) {
+        return v;
+      }
+    })
+    return false;
+  },
+  setCookie(key, val, options) {
+    //  options
+    //  "max-age" = 秒数
+    //  "path",
+    //  "domain",
+    //  "secure",
+    //  expires = GMTString-format
+    if (!options) {
+      document.cookie = `${key}=${encodeURIComponent(val)};`;
+    }else {
+      const temp = [];
+      for ( const [ k, v ] of Object.entries(options) ) {
+        temp.push( `${k}=${v}` );
+      }
+      document.cookie = `${key}=${encodeURIComponent(val)};${ temp.join(";") }`;
+    }
+  }
+}

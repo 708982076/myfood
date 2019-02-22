@@ -102,7 +102,9 @@ webpackConfig = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': path.join(__dirname, './src'),
-      'assets': path.join(__dirname, './src/assets')
+      'assets': path.join(__dirname, './src/assets'),
+      'root': path.join(__dirname),
+      'lib': path.join(__dirname, './src/lib')
     }
   },
   plugins: [

@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import {jsonp} from '../../../getData'
+import {jsonp} from 'root/getData'
 import Header from '../Header/Header'
 import ShopList from '../ShopList/ShopList'
-import {debounce, getDate} from '../../config/utils'
+import {debounce, getDate} from 'lib/utils'
 export default {
   components: {
     Header,

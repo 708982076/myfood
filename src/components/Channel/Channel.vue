@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {getNearbySeller} from '../../../getData'
+import {getNearbySeller} from 'root/getData'
 import Header from '../Header/Header'
 import ShopList from '../ShopList/ShopList'
 export default {

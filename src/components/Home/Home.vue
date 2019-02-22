@@ -4,16 +4,16 @@
       <h2 class="loc-header" slot="loc-header">
         <router-link to="/city" class="loc-link">
           <i class="icon iconfont icon-daohangdizhi"></i>
-          <span class="loc-name">{{cityName}}</span>
+          <span class="loc-name">信阳</span>
           <i class="icon iconfont icon-jiantouyou"></i>
         </router-link>
       </h2>
       <router-link to="/search" slot="search" class="search-link">
         <i class="icon iconfont icon-sousuo"></i>
       </router-link>
-      <router-link :to="{path: isLogin ? '/home' : '/login'}" slot="account" class="account-link">
+      <!-- <router-link :to="{path: isLogin ? '/home' : '/login'}" slot="account" class="account-link">
         <i class="icon iconfont icon-wode"></i>
-      </router-link>
+      </router-link> -->
     </Header>
     <div class="nav-list">
       <router-link to="/channel" class="nav-item">
@@ -59,29 +59,28 @@
 <script>
 import Header from '../Header/Header';
 import ShopList from '../ShopList/ShopList';
-import {getNearbySeller} from '../../../getData';
+import { getNearbySeller } from 'root/getData';
 import { mapState, mapActions, mapGetters } from 'vuex';
-import { Alert } from 'iview';
+import { cookieUtils } from 'lib/utils';
 export default {
   components: {
     Header,
-    ShopList,
-    Alert
+    ShopList
   },
   created() {
-    this.guessCity.city || this.getCurrentCity()
+    // this.guessCity.city || this.getCurrentCity()
     getNearbySeller().then(res => {
       this.sellers = res.data
     })
   },
   computed: {
-    ...mapState(['guessCity', 'isLogin', 'currentCity']),
-    cityName() {
-      return this.guessCity.city || this.currentCity.city
-    }
+    // ...mapState(['guessCity', 'isLogin']),
+    // cityName() {
+    //   return this.guessCity.city || this.currentCity.city
+    // }
   },
   methods: {
-    ...mapActions(['getCurrentCity'])
+    // ...mapActions(['getCurrentCity'])
   },
   data() {
     return {

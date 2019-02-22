@@ -20,9 +20,9 @@
 
 <script>
 import Header from '../Header/Header'
-import { login } from '../../../getData' 
+import { login } from 'root/getData' 
 import { mapMutations, mapState} from 'vuex'
-import { setStorage } from '../../config/utils'
+import { setStorage } from 'lib/utils'
 export default {
   components: {
     Header

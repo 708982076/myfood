@@ -47,8 +47,8 @@
 
 <script>
 import Star from "../Star/Star";
-import { getComment } from "../../../getData";
-import { getDate } from "../../config/utils";
+import { getComment } from "root/getData";
+import { getDate } from "lib/utils";
 export default {
   components: {
     Star

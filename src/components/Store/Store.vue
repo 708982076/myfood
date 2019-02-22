@@ -20,7 +20,7 @@ import Goods from "../Goods/Goods";
 import GoodsHeader from "../GoodsHeader/GoodsHeader";
 import ShopDetail from "../ShopDetail/ShopDetail";
 import Comment from "../Comment/Comment";
-import {getSellerInfo, getComment} from '../../../getData'
+import {getSellerInfo, getComment} from 'root/getData'
 export default {
   components: {
     Goods,
