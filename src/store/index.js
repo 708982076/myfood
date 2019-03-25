@@ -1,28 +1,17 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import mutations from './mutations'
-import actions from './actions'
-import getters from './getters'
+import mutations from './root/mutations'
+import actions from './root/actions'
+import getters from './root/getters'
+import state from './root/state'
+import modules from './modules'
 Vue.use(Vuex)
 
-/*
-  进入组件后获取当前城市
-  如果更换了城市，下次在进入再获取当前城市对比如果不一样就弹窗
-  确定覆盖更换的城市、弹框消失，取消弹框消失
-*/
-
 const store = new Vuex.Store({
-  state: {
-    currentCity: {}, 
-    guessCity: {},
-    isLogin: false,
-    showAlert: false,
-    user_info: {},
-    shopCart: [],
-    goodsList: []
-  },
+  state,
   mutations,
   actions,
-  getters
+  getters,
+  modules
 })
 export default store

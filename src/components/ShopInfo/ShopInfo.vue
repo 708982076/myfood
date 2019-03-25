@@ -1,42 +1,32 @@
 <template>
   <div class="shop-info">
-    <div class="avatar">
-      <router-link :to="{name: 'store', params:{id: seller.id}}">
-        <img :src="seller.avatar">
-      </router-link>
-    </div>
-    <div class="info">
-      <router-link :to="{name: 'store', params:{id: seller.id}}">
-        <h2 class="shop-title">{{seller.name}}</h2>
-        <div class="shop-mid clear">
+    <router-link clsss="shop-wrapper" :to="{ path: '/store', query:{ id: store._id } }">
+      <div class="avatar">
+        <img :src="store.avatar">
+      </div>
+      <div class="info">
+        <h2 class="shop-title">{{store.name}}</h2>
+        <div class="shop-mid">
           <span class="mid-left">
-            <Star :score="seller.score / 2"></Star>
-            <span class="sell-count">
-              月销售{{seller.sellCount}}
-            </span>
+            <Star :score="store.score"></Star>
+            <span class="sell-count">月销售{{store.sellCount}}</span>
           </span>
           <span class="mid-right">
-            <span class="delivery-time">
-              {{seller.deliveryTime}}min
-            </span>
+            <span class="delivery-time">{{store.deliveryTime}}min</span>
             <span>|</span>
-            <span class="distance">
-              {{seller.distance}}
-            </span>
+            <span class="distance">{{store.distance}}</span>
           </span>
-        </div> 
-        <div class="shop-mid-btm clear">
+        </div>
+        <div class="shop-mid-btm">
           <span class="min-price">
-            起送价￥{{seller.minPrice}}
+            起送价￥{{store.minPrice}}
             <span class="vertical">|</span>
           </span>
-          <span class="delivery-price">
-            配送￥{{seller.deliveryPrice}}
-          </span>
-          <i class="description">{{seller.description}}</i>
+          <span class="delivery-price">配送￥{{store.deliveryPrice}}</span>
+          <i class="description">{{store.description}}</i>
         </div>
-      </router-link>
-    </div>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -47,74 +37,85 @@ export default {
     Star
   },
   props: {
-    seller: {
-      type: Object
+    store: {
+      type: Object,
+      required: true
     }
   },
   data() {
-    return {
-    }
+    return {};
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .shop-info{
-    margin: 0 .5rem;
-    padding: .5rem 0;
+.shop-info {
+  margin: 0 0.5rem;
+  padding: 0.5rem 0;
+  height: 3.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  .avatar {
+    position: absolute;
+    width: 5rem;
+    height: 3.5rem;
+    border: 1px solid #ccc;
     overflow: hidden;
-    border-bottom: 1px solid #ccc;
-    .avatar {
-      position: absolute;
-      width: 5rem;
-      height: 3.5rem;
-      border: 1px solid #ccc;
-      overflow: hidden;
-      a {
-        display: block;
-        img {
-          width: 100%;
-        }
+    img {
+        width: 100%;
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5.3rem;
+    height: 100%;
+    justify-content: center;
+    text-align: left;
+    .shop-title {
+      flex: 1;
+      font-size: .8rem;
+      font-weight: bold;
+    }
+    .shop-mid span,
+    .shop-mid-btm span {
+      color: gray;
+    }
+    .shop-mid {
+      flex: 1;
+      margin-top: 0.3rem;
+      .mid-left {
+        float: left;
+        line-height: 2;
+        font-size: 0.6rem;
+      }
+      .mid-right {
+        float: right;
+        line-height: 2;
+        font-size: 0.6rem;
+        color: #fff;
       }
     }
-    .info {
-      margin-left: 5.5rem;
-      text-align: left;
-      h2 {
-        font-size: .9rem;
-        font-weight: bold;
+    .shop-mid-btm {
+      flex: 1;
+      margin-top: 0.2rem;
+      font-size: 0.7rem;
+      .min-price {
+        float: left;
       }
-      .shop-mid{
-        margin-top: .2rem;
-        .mid-left {
-          float: left;
-          font-size: .6rem; 
-        }
-        .mid-right {
-          margin-top: .1rem;
-          float: right;
-          font-size: .6rem; 
-        }
+      .vertical {
+        margin-right: 7px;
       }
-      .shop-mid-btm {
-        margin-top: .2rem;
-        font-size: .7rem; 
-        .min-price {
-          float: left;
-        }
-        .vertical {
-          margin-right: 7px;
-        }
-        .delivery-price {
-          float: left;
-        }
-        .description {
-          float: right;
-          padding: .1rem .2rem;
-          background-color: royalblue;
-          color: #fff;
-        }
+      .delivery-price {
+        float: left;
+      }
+      .description {
+        float: right;
+        padding: 0.1rem 0.2rem;
+        background-color: orange;
+        color: #333;
       }
     }
   }
+}
 </style>

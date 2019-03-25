@@ -105,8 +105,29 @@ html,body{
     animation: backOpacity 2s ease-in-out infinite;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 // $white: rgb(255, 255, 255);
 // $black: rgb(7, 17, 27);
 // $gray: rgb(147, 153, 159);
 // $red: rgb(240, 20, 20);
 // $blue: rgb(0, 160, 220);
+
+@import './mixin.scss';
+
+.decrease_3 {
+  @include bg-image('decrease_3');           
+}
+.discount_3 {
+  @include bg-image('discount_3');           
+}
+.special_3 {
+  @include bg-image('special_3');           
+}

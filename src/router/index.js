@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from '../App'
-import city from '@/components/city/city'
-import home from '@/components/home/home'
-import search from '@/components/search/search'
-import channel from '@/components/channel/channel'
-import login from '@/components/login/login'
-import store from '@/components/store/store'
+const App = () => import(/* webpackChunkName: "App" */ '../App');
+const City = () => import(/* webpackChunkName: "City" */'../pages/City/City');
+const Home = () => import(/* webpackChunkName: "Home" */'../pages/Home/Home');
+const Search = () => import(/* webpackChunkName: "Search" */'../pages/Search/Search');
+const Channel = () => import(/* webpackChunkName: "Channel" */'../pages/Channel/Channel');
+const Login = () => import(/* webpackChunkName: "Login" */'../pages/Login/Login');
+const Error = () => import(/* webpackChunkName: "Error" */'../pages/Error/Error');
+import store from './store';
 
 Vue.use(Router)
 
@@ -14,9 +15,9 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      mode: 'history',
       component: App,
       children: [
+        store,
         {
           path: '',
           redirect: '/home'
@@ -24,37 +25,40 @@ const router = new Router({
         {
           path: '/city',
           name: 'city',
-          component: city
+          component: City
         },
         {
-          path: '/home/:city_name?',
+          path: '/home/:cityname?',
           name: 'home',
-          component: home
-        },
-        {
-          path: '/store/:id',
-          name: 'store',
-          component: store
+          component: Home
         },
         {
           path: '/search',
           name: 'search',
-          component: search
+          component: Search
         },
         {
           path: '/channel',
           name: 'channel',
-          component: channel
+          component: Channel
         },
         {
           path: '/login',
           name: 'login',
-          component: login
+          component: Login
+        },
+        {
+          path: '/error',
+          name: 'error',
+          component: Error
+        },
+        {
+          path: '*',
+          redirect: '/error'
         }
       ]
     }
   ]
 })
-
 
 export default router

@@ -32,7 +32,7 @@ webpackConfig = {
     }
   },
   devServer: {
-    port: 3000,
+    port: 8000,
     open:true
   },
   module: {
@@ -45,13 +45,19 @@ webpackConfig = {
             'vue-style-loader',
           // MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: "css-loader?sourceMap",
             // options: {
             //   modules: true,
             //   localIdentName: '[local]_[hash:base64:8]'
             // }
           },
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              sourceMapContents : true
+            }
+          }
         ]
       },
       // {
@@ -98,11 +104,12 @@ webpackConfig = {
       }
     ]
   },
+  devtool: _modeFlag ? 'cheap-module-source-map' : 'cheap-module-eval-source-map' ,
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': path.join(__dirname, './src'),
-      'assets': path.join(__dirname, './src/assets'),
+      '@assets': path.join(__dirname, './src/assets'),
       'root': path.join(__dirname),
       'lib': path.join(__dirname, './src/lib')
     }

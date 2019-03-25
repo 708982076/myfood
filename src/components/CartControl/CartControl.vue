@@ -1,69 +1,87 @@
 <template>
   <div class="cart-control">
     <transition name="move">
-      <i class="icon-remove_circle_outline decrease" v-if="food.count > 0" @click="decreaseCart()"></i>
+      <i class="icon-remove_circle_outline decrease" @click="decreaseCount" v-if="data.count > 0"></i>
     </transition>
-    <span class="num" v-if="food.count > 0">{{food.count}}</span>
-    <i class="icon-add_circle add" @click="addCart()"></i>
+    <span class="num" v-if="data.count > 0">{{data.count}}</span>
+    <i class="icon-add_circle add" @click="addCart"></i>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("shopcart");
+
 export default {
   props: {
-    food: {
-      type: Object
-    },
     id: {
-      type: Number
+      type: Number,
+      required: true
     }
   },
+  data() {
+    return {
+      data: {
+        id: 0,
+        count: 0
+      }
+    };
+  },
+  async created() {
+    this.data.id = this.id;
+    const data = await this.updateFoodItemCount(this.data);
+    if (data) {
+      this.data = data;
+    }
+  },  
+  computed: {
+    ...mapState(["foodCountItems"])
+  },
   methods: {
-    addCart(){
-      if (!this.food.count){
-        this.$set(this.food, 'count', 1)
-      }else {
-        this.food.count++;
-      }
+    ...mapActions(["addShopCart", "removeShopCart", "updateFoodItemCount", 'clearCache']),
+    addCart() {
+      this.data.count++;
+      this.addShopCart(this.data);
     },
-    decreaseCart(){
-      if (this.food.count){
-        this.food.count--;
-      }
+    decreaseCount() {
+      if (this.data.count === 0) return;
+      this.data.count--;
+      this.removeShopCart(this.data);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import '../../style/mixin.scss';
-.cart-control{
+@import "../../style/mixin.scss";
+.cart-control {
   display: inline-block;
   vertical-align: middle;
   font-size: 0;
-  .decrease{
+  .decrease {
     display: inline-block;
-    padding: 5px;    
+    padding: 5px;
     color: orange;
     font-size: 28px;
-    vertical-align: middle ;
-    transform: translate3d(0, 0, 0);
-    &.move-enter-active, &.move-leave-active {
+    vertical-align: middle;
+    &.move-enter-active,
+    &.move-leave-active {
       transition: all 0.4s linear;
     }
-    &.move-enter, &.move-leave-to{
-      transform: translate3d(24px, 0, 0) rotate(-180deg);
+    &.move-enter,
+    &.move-leave-to {
+      transform: translateX(24px) rotate(180deg) scale(1) translateZ(0);
       opacity: 0;
     }
   }
-  .add{
+  .add {
     display: inline-block;
     padding: 5px;
     color: orange;
     font-size: 28px;
     vertical-align: middle;
   }
-  .num{
+  .num {
     display: inline-block;
     width: 18px;
     font-size: 10px;

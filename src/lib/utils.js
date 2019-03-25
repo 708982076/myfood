@@ -1,19 +1,29 @@
 import { baseURL } from 'root/config'
-export const getStorage = (prop) => {
-  if (!prop) return
-  return JSON.parse(localStorage.getItem(prop)) || []
+import { totalmem } from 'os';
+const storagefactory = {
+  session: sessionStorage,
+  local: localStorage
 }
-export const setStorage = (prop, value) => {
+const defaultStorage = { type: 'local' };
+export const getStorage = (prop, options = defaultStorage) => {
+  const storage = storagefactory[options.type];
+  if (!prop) return
+  return JSON.parse(storage.getItem(prop))
+}
+export const setStorage = (prop, value, options = defaultStorage) => {
+  const storage = storagefactory[options.type];
   if (!prop) return
   if (typeof value !== 'string') {
     value = JSON.stringify(value)
   }
-  localStorage.setItem(prop, value)
+  storage.setItem(prop, value)
 }
-export const removeStorage = (prop) => {
+export const removeStorage = (prop, options = defaultStorage) => {
+  const storage = storagefactory[options.type];
   if (!prop) return
-  localStorage.removeItem(prop)
+  storage.removeItem(prop)
 }
+
 export const getDate = (date) => {
   let year = date.getFullYear(),
       month = date.getMonth() + 1,
@@ -37,7 +47,7 @@ export const request = async (url, data = {}, method = 'GET') => {
   if (method === 'GET') {
     let dataUrl = '';
     Object.keys(data).forEach(key => {
-      dataUrl = `${key}=${data[key]}&`;
+      dataUrl += `${key}=${data[key]}&`;
     })
     if (dataUrl) {
       dataUrl = dataUrl.slice(0, -1);
@@ -49,7 +59,7 @@ export const request = async (url, data = {}, method = 'GET') => {
       method,
       headers: {
         'Accept': 'application/json',
-        'Content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       credentials: 'include',
       mode: "cors",
@@ -84,7 +94,7 @@ export const request = async (url, data = {}, method = 'GET') => {
 			}
 
 			requestObj.open(method, url, true);
-			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			requestObj.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			requestObj.send(sendData);
 
 			requestObj.onreadystatechange = () => {
@@ -133,3 +143,7 @@ export const cookieUtils = {
     }
   }
 }
+export const sum = (f, digit) => { 
+  var m = Math.pow(10, digit); 
+  return parseInt(f * m, 10) / m; 
+} 

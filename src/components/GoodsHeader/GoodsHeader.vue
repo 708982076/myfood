@@ -1,25 +1,25 @@
 <template>
   <div class="store-header" id="store-header">
     <div class="background">
-      <img :src="seller.avatar">
+      <img :src="storeItem.avatar">
     </div>
     <div class="header-hd clear">
         <div class="avatar-wrap">
-          <img :src="seller.avatar">
+          <img :src="storeItem.avatar">
         </div>
         <div class="info-wrap">
             <div class="info-title">
                 <span class="brand"></span>
-                <span class="info-name">{{seller.name}}</span>
+                <span class="info-name">{{storeItem.name}}</span>
             </div>
             <div class="info-desc">
-              {{seller.description}} / {{seller.deliveryTime}}分钟到达
+              美团外卖 / {{storeItem.deliveryTime}}分钟到达
             </div>
         </div>
     </div>
     <div class="header-ft">
       <i class="bulletin"></i>
-      <span class="text">{{seller.bulletin}}</span>
+      <span class="text">{{storeItem.bulletin}}</span>
     </div>
   </div>
 </template>
@@ -28,8 +28,9 @@
 
 export default {
   props: {
-    seller: {
-      type: Object
+    storeItem: {
+      type: Object,
+      required: true
     }
   },
   created(){
@@ -39,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../style/mixin.scss';
+@import '@/style/mixin.scss';
 .store-header {
   position: relative;
   overflow: hidden;
@@ -49,7 +50,7 @@ export default {
     padding: 20px;
     .avatar-wrap {
       float: left;
-      margin-right: 14px;
+      margin-right: 14px; 
       img {
         display: block;
         width: 60px;

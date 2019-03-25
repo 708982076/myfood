@@ -103,7 +103,7 @@
       .search-link {
         float: left;
         line-height: 2.4rem;
-        padding: 0 0.2rem;
+        padding: 0 15px;
         .icon-sousuo {
           color: #fff;
           font-size: 0.8rem;

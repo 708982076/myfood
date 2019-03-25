@@ -1,14 +1,14 @@
 import Ojsonp from 'jsonp'
 import { request } from 'lib/utils';
 
-export const getHotCity = () => request('/hotCity')
-export const getallCity = () => request('/allCity')
-export const getCurrentCity = () => request('/currentCity')
-export const login = (user) => request('/login', user, 'POST')
-export const getSellerInfo = (id) => request('/sellerInfo', {id}) //获取店铺信息
-export const getSellerFoodList = (id) => request('/sellerFoodList', {id}) //获取店铺食品
-export const getNearbySeller = () => request('/nearbySeller') //获取附近店铺
-export const getComment = (id) => request('/comment', {id}) //获取店铺评论
+export const getAllCity = () => request('/city');
+export const getLocation = (query) => request('/location', query);
+export const getStoreItem = (id) => request('/storeItem', { id });
+export const getStoreList = () => request('/store');
+export const getStoreInfo = (id) => request('/storeinfo', {id});
+export const getStoreComment = (id) => request('/storecomment', {id});
+export const storeWordSerach = (keyword) => request('/storeWordSerach', {keyword});
+
 export const jsonp = (url, data, opts) => {
   function params(data) {
     let url = ''
