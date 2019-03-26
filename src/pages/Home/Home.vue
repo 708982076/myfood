@@ -12,7 +12,9 @@
         <i class="icon iconfont icon-sousuo"></i>
       </router-link>
     </Header>
-    <ShopList :storeList="storeList"></ShopList>
+    <div class="home-list">
+      <ShopList :storeList="storeList"></ShopList>
+    </div>
     <Loading/>
   </div>
 </template>
@@ -63,6 +65,10 @@ export default {
 </script>
 <style lang="scss">
   .home-page {
+    .home-list {
+      position: relative;
+      left: 2.4rem;
+    }
     .nav-list {
       background-color: #fff;
       padding-bottom: 20px;

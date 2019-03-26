@@ -27,7 +27,7 @@
       </div>
       <div class="users-comment">
         <CommentLabel :labels="labels" @changelabel="changelabel"/>
-        <CommentItem :comments="comments" @piclick="piclick"/>
+        <CommentItem :comments="comments" @piclick="piclick" :isloadup="isloadup"/>
       </div>
     </div>
     <PicArea v-if="show" @created="disable" @destroyed="destroyed" v-bind="imgObj"/>
@@ -71,17 +71,22 @@ export default {
           bounceTime: 300,
           click: true,
           probeType: 3,
-          pullUpLoad: {
-            threshold: 50
-          }
+          pullUpLoad: true
         });
 
         this.scroller.on("pullingUp", () => {
-          this.comments = this.comments.concat(comments);
+          this.isloadup = true;
           this.$nextTick(() => {
             this.scroller.refresh();
-            this.scroller.finishPullUp();
           })
+          setTimeout(() => {
+            this.comments = this.comments.concat(comments);
+            this.$nextTick(() => {
+              this.scroller.finishPullUp();
+              this.scroller.refresh();
+              this.isloadup = false;
+            })
+          }, 1000);
         });
       });
     }
@@ -124,7 +129,7 @@ export default {
       comments: [],
       show: false,
       imgObj: {},
-      loading: true
+      isloadup: false
     };
   },
   beforeDestroy() {

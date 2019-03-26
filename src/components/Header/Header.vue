@@ -34,11 +34,15 @@
 
 <style lang="scss">
   header.nav-header{
-    position: relative;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
     height: 2.4rem;
     color: #fff;
     overflow: hidden;
     background-color:#06c1ae;
+    z-index: 99;
     .head-left{
       position: absolute;
       left: 0;

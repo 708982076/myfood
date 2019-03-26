@@ -34,7 +34,7 @@
         <div class="detail-right">
           <span v-if="serTime.morning">{{'上午：' + serTime.morning}}</span>
           <p v-if="serTime.afternoon">{{'下午：' + serTime.afternoon}}</p>
-          <span v-if="!serTime.afternoon && !serTime.afternoon">随时配送</span>
+          <span v-if="!serTime.afternoon && !serTime.morning">随时配送</span>
         </div>
       </div>
     </div>

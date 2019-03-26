@@ -51,6 +51,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
+  padding-top: 2.4rem;
   background-color: #fff;
   .no-res {
     position: absolute;

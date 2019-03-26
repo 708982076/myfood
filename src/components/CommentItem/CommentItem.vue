@@ -25,6 +25,9 @@
         </ul>
       </div>
     </li>
+    <div class="loadupitem" v-if="isloadup">
+      <i class="icon iconfont icon-huanyihuan"></i>
+    </div>
   </ul>
 </template>
 
@@ -35,6 +38,10 @@ export default {
     comments: {
       type: Array,
       required: true
+    },
+    isloadup: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -118,6 +125,17 @@ export default {
         height: 100%;
       }
     }
+  }
+}
+.loadupitem {
+  text-align: center;
+  // background-color: #000;
+  i {
+    display: inline-block;
+    padding: 10px;
+    color: rgba(#000, .5);
+    font-size: 20px;
+    animation: rotate .8s infinite linear;
   }
 }
 </style>

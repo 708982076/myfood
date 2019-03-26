@@ -82,15 +82,14 @@
         </div>
       </div>
     </div>
-    <div class="unplug" @click="scrollTop" v-if="scrollY > 900">
-      ⬆
+    <div class="unplug" v-if="buttontop" @click="scrollTop">
+      顶部
     </div>
     <Loading :showtime="500"/>
   </div>
 </template>
 
 <script>
-import BScroll from 'better-scroll'
 import Header from '@/components/Header/Header'
 import Loading from '@/components/Loading/Loading'
 import { getStorage, setStorage } from 'lib/utils'
@@ -109,12 +108,20 @@ export default {
       allCityList: [],
       flag: false,
       doms: [],
-      scrollY: 0,
-      sroller: BScroll
+      allwrapH: [],
+      buttontop: false
     }
   },
   methods: {
     ...mapActions(['getPositionAction']),
+    scrollTop() {
+      this.buttontop =false;
+      window.scrollTo(0, 0);
+    },
+    scrollTo(i) {
+      this.buttontop =true;
+      window.scrollTo(0, this.allwrapH[i]);
+    },
     handleClick(e) {
       if (!this.flag) {
         return;
@@ -145,13 +152,6 @@ export default {
           id
         }
       }
-    },
-    scrollTo(index) {
-      this.sroller.scrollToElement( this.$refs.blockCity[index], 300, 0, -50 );
-    },
-    scrollTop() {
-      this.sroller.scrollTo( 0, 0, 300 );
-      this.upFlag = false;
     }
   },
   computed: {
@@ -182,52 +182,38 @@ export default {
     }
     this.hotCityList = Object.freeze(hotCity);
     this.allCityList = Object.freeze(allCity);
-  },
-  async mounted() {
-    this.$nextTick( () => {
-      this.sroller = new BScroll(
-        this.$refs.cityPage, 
-        { 
-          click: true,
-          bounceTime: 300,
-          probeType: 3,
-          bounce: false
-        }
-      );
-      this.sroller.on('scrollEnd', ({y}) => {
-        this.scrollY = Math.abs(Math.floor(y));
-      });
-    } )
-  },
-  beforeDestroy() {
-    this.sroller.destroy();
+
+    this.$nextTick(() => {
+      const doms = this.$refs.blockCity;
+      for (let i = 0; i < doms.length; i++){
+        const height = doms[i].offsetTop;
+        this.allwrapH.push(height);
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss">
   .city-wrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
     .unplug {
       position: fixed;
       bottom: 50px;
       right: 20px;
       width: 50px;
       height: 50px;
+      z-index: 10;
       background: #06c1ae;
       border-radius: 50%;
       line-height: 50px;
       text-align: center;
-      font-size: 40px;
       color: #fff;
     }
   }
   .cityBox{
+    position: relative;
+    top: 2.4rem;
+    left: 0;
     padding: 0 0.3rem;
     .location-city, h4{
       font-size: 0.6rem;

@@ -31,7 +31,7 @@ export default {
     return {
       index: 0,
       area: {},
-      page: 1,
+      page: 1
     }
   },
   computed: {
@@ -56,6 +56,9 @@ export default {
           loop: false,
         }
       });
+      if (this.images.length === 1) {
+        this.area.destroy()       
+      }
       this.area.on('scrollEnd', () => {
         const { pageX } = this.area.getCurrentPage();
         let page = pageX+1;
