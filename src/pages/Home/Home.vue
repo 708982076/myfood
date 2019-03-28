@@ -67,7 +67,8 @@ export default {
   .home-page {
     .home-list {
       position: relative;
-      left: 2.4rem;
+      top: 2.4rem;
+      left: 0;
     }
     .nav-list {
       background-color: #fff;

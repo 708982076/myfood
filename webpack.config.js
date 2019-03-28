@@ -21,7 +21,7 @@ webpackConfig = {
         commons: {
           chunks: "initial",
           name: "common",
-          minChunks: 1,
+          minChunks: 2,
           maxInitialRequests: 5,
           minSize: 0
         }
@@ -104,7 +104,7 @@ webpackConfig = {
       }
     ]
   },
-  devtool: _modeFlag ? 'cheap-module-source-map' : 'cheap-module-eval-source-map' ,
+  // devtool: _modeFlag ? 'cheap-module-source-map' : 'cheap-module-eval-source-map' ,
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
