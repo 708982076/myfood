@@ -2,7 +2,7 @@
   <div class="search-page">
     <Header :go-back="true">
       <div class="search-bar" slot="search-bar">
-        <input type="text" class="search-input" placeholder="店铺、商品名称" v-model.trim="q">
+        <input type="text" class="search-input" placeholder="肯德基，输入其中一字即可搜索到" v-model.trim="q">
       </div>
     </Header>
     <div class="search-content">
@@ -29,16 +29,17 @@ export default {
     };
   },
   watch: {
-    async q(n, o) {
-      const reg = /^\w+$/;
-      if (o.length > n.length || reg.test(n)) {
-        this.stores = [];
-        return 
-      }
-      const { data, code } = await storeWordSerach(encodeURIComponent(n));
-      if (code === 0) {
-        this.stores = data;
-      }
+    q: {
+      handler: debounce(async function(n) {
+        if (n.length === 0) {
+          this.stores = [];
+          return ;
+        }
+        const {data, code} = await storeWordSerach(encodeURIComponent(n));
+        if (code === 0) {
+          this.stores = data;
+        }
+      }, 500)
     }
   }
 };

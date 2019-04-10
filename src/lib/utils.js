@@ -32,13 +32,13 @@ export const getDate = (date) => {
 }
 export function debounce(func, delay) {
   let timer
-  return (...args) => {
-      if (timer) {
-          clearTimeout(timer)
-      }
-      timer = setTimeout(() => {
-          func.apply(this, args)
-      }, delay)
+  return function(...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
   }
 }
 export const request = async (url, data = {}, method = 'GET') => {
