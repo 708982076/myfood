@@ -49,25 +49,24 @@
       </div>
       <ul v-for="(item, i) in _activityList" :key="i" class="activityList">
         <li>
-          <img :src="item.iconUrl" class="detail-icon">
+          <ImageLoading :src="item.iconUrl" class="detail-icon"></ImageLoading>
           <span class="detail-desc">{{item.actDesc}}</span>
         </li>
       </ul>
     </div>
-    <Loading/>
   </div>
 </template>
 
 <script>
 import Star from '@/components/Star/Star';
-import Loading from '@/components/Loading/Loading'
 import {getStoreInfo} from 'root/getData';
+import ImageLoading from '@/common/ImageLoading/ImageLoading';
 
 export default {
   props: ['storeItem'],
   components: {
     Star,
-    Loading
+    ImageLoading
   },
   data() {
     return{

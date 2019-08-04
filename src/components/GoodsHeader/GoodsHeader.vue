@@ -5,7 +5,7 @@
     </div>
     <div class="header-hd clear">
         <div class="avatar-wrap">
-          <img :src="storeItem.avatar">
+          <ImageLoading :src="storeItem.avatar"></ImageLoading>
         </div>
         <div class="info-wrap">
             <div class="info-title">
@@ -25,8 +25,13 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
+import ImageLoading from '@/common/ImageLoading/ImageLoading';
 
 export default {
+  components: {
+    ImageLoading
+  },
   props: {
     storeItem: {
       type: Object,
@@ -60,7 +65,12 @@ export default {
     }
     .info-wrap {
       .info-title { 
-        font-size: 0;
+        overflow: hidden;
+        font-size: 16px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+        margin-right: 23px;
         .brand{
           margin-right: 6px;
           display: inline-block;
@@ -79,6 +89,7 @@ export default {
         }
       }
       .info-desc{
+        overflow: hidden;
         font-size: 12px;
         color: $white;
         font-weight: 200;

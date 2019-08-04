@@ -146,4 +146,4 @@ export const cookieUtils = {
 export const sum = (f, digit) => { 
   var m = Math.pow(10, digit); 
   return parseInt(f * m, 10) / m; 
-} 
+}

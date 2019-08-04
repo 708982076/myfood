@@ -1,35 +1,10 @@
 <template>
-  <div class="loading" v-if="show">
+  <div class="loading">
     <div class="loading__icon">
       <i class="icon iconfont icon-huanyihuan"></i>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    showtime: {
-      type: Number,
-      default: 300
-    }
-  },
-  data() {
-    return {
-      show: true,
-      timer: ''
-    }
-  },
-  created() {
-    this.timer = setTimeout(() => {
-      this.show = false;
-    }, this.showtime);
-  },
-  destroyed() {
-    clearTimeout(this.timer);
-  }
-};
-</script>
 
 <style lang="scss">
 .loading {

@@ -85,21 +85,18 @@
     <div class="unplug" v-if="buttontop" @click="scrollTop">
       顶部
     </div>
-    <Loading :showtime="500"/>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header/Header'
-import Loading from '@/components/Loading/Loading'
 import { getStorage, setStorage } from 'lib/utils'
 import { getHotCity, getAllCity, getLocation} from 'root/getData'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
-    Header,
-    Loading
+    Header
   },
   data() {
     return {

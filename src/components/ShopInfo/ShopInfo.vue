@@ -32,9 +32,12 @@
 
 <script>
 import Star from "../Star/Star";
+import ImageLoading from '@/common/ImageLoading/ImageLoading';
+
 export default {
   components: {
-    Star
+    Star,
+    ImageLoading
   },
   props: {
     store: {

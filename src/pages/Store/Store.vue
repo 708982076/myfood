@@ -17,23 +17,20 @@
     </div>
     <transition :name="slidename">
       <keep-alive>
-          <router-view :storeItem="storeItem"></router-view>
+        <router-view :storeItem="storeItem"></router-view>
       </keep-alive>
     </transition>
-    <Loading v-if="loading"/>
   </div>
 </template>
 
 <script>
 import GoodsHeader from "@/components/GoodsHeader/GoodsHeader";
-import Loading from '@/components/Loading/Loading';
 import {createNamespacedHelpers} from 'vuex';
 const { mapActions } = createNamespacedHelpers('shopcart');
 
 export default {
   components: {
-    GoodsHeader,
-    Loading
+    GoodsHeader
   },
   data() {
     return {

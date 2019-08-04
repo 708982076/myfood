@@ -31,14 +31,12 @@
       </div>
     </div>
     <PicArea v-if="show" @created="disable" @destroyed="destroyed" v-bind="imgObj"/>
-    <Loading/>
   </div>
 </template>
 
 <script>
 import Bscroll from "better-scroll";
 import Star from "@/components/Star/Star";
-import Loading from "@/components/Loading/Loading";
 import { getStoreComment } from "root/getData";
 import { debounce } from 'lib/utils';
 import CommentLabel from "@/components/CommentLabel/CommentLabel";
@@ -49,8 +47,7 @@ export default {
     Star,
     CommentLabel,
     CommentItem,
-    PicArea,
-    Loading
+    PicArea
   },
   props: {
     storeItem: {

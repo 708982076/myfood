@@ -1,7 +1,8 @@
-const Store = () => import(/* webpackChunkName: "Store" */ '../pages/Store/Store');
-const Goods = () => import(/* webpackChunkName: "Goods" */'../pages/Store/Goods');
-const Comment = () => import(/* webpackChunkName: "Comment" */'../pages/Store/Comment');
-const ShopDetail = () => import(/* webpackChunkName: "ShopDetail" */'../pages/Store/ShopDetail');
+import { AsyncComponent } from '../async';
+let Store = () => AsyncComponent(import(/* webpackChunkName: "Store" */ './Store'));
+let Goods = () => AsyncComponent(import(/* webpackChunkName: "Goods" */'./Goods'));
+let Comment = () => AsyncComponent(import(/* webpackChunkName: "Comment" */'./Comment'));
+let ShopDetail = () => AsyncComponent(import(/* webpackChunkName: "ShopDetail" */'./ShopDetail'));
 
 export default {
   path: "/store",

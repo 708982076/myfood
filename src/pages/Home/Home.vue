@@ -15,22 +15,19 @@
     <div class="home-list">
       <ShopList :storeList="storeList"></ShopList>
     </div>
-    <Loading/>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header/Header';
 import ShopList from '@/components/ShopList/ShopList';
-import Loading from '@/components/Loading/Loading';
 import { getStoreList } from 'root/getData';
 import { mapState, mapActions } from 'vuex';
 import { cookieUtils, removeStorage } from 'lib/utils';
 export default {
   components: {
     Header,
-    ShopList,
-    Loading
+    ShopList
   },
   data() {
     return {

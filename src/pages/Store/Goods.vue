@@ -2,9 +2,11 @@
   <div class="goods" id="goods">
     <div class="goods-left" ref="menuwrapper">
       <div class="menu-wraper">
-        <div class="menu-wrap" ref="menulist" 
-          v-for="(item, index) in storeItem.food_menu" 
-          :key="index" 
+        <div
+          class="menu-wrap"
+          ref="menulist"
+          v-for="(item, index) in storeItem.food_menu"
+          :key="index"
           @click="scrollToGoods(index)"
           :class="{ current: index === currentIndex }"
         >
@@ -17,13 +19,13 @@
     </div>
     <div class="goods-right" ref="goodswrapper">
       <div class="goods-wrapper">
-        <div class="goods-block" ref="goodslist"
-          v-for="item in storeItem.food_menu" :key="item.id"
-        >
+        <div class="goods-block" ref="goodslist" v-for="item in storeItem.food_menu" :key="item.id">
           <div class="goods-title">{{item.name}}</div>
           <ul class="goods-wrap">
             <li v-for="food in item.foods" :key="food.id" class="goods-item">
-              <div class="image-wrap"><img :src="food.image"></div>
+              <div class="image-wrap">
+                <ImageLoading :src="food.image" />
+              </div>
               <div class="goods-info">
                 <div class="title">{{food.name}}</div>
                 <span class="desc">{{food.description}}</span>
@@ -32,9 +34,12 @@
                   <span class="good-per">好评{{food.rating}}%</span>
                 </div>
                 <div class="price-wrap">
-                  <div class="price"> 
+                  <div class="price">
                     <span class="new-price">￥{{food.price}}</span>
-                    <span class="old-price" v-if="food.oldPrice && food.oldPrice !== food.price">￥{{food.oldPrice}}</span>
+                    <span
+                      class="old-price"
+                      v-if="food.oldPrice && food.oldPrice !== food.price"
+                    >￥{{food.oldPrice}}</span>
                   </div>
                   <CartControl :id="food.id"></CartControl>
                 </div>
@@ -43,15 +48,16 @@
           </ul>
         </div>
       </div>
-    </div> 
+    </div>
     <ShopCart :minPrice="storeItem.minPrice" :deliveryPrice="storeItem.deliveryPrice"></ShopCart>
   </div>
 </template>
 
 <script>
-import BScroll from 'better-scroll'
+import BScroll from "better-scroll";
 import ShopCart from "@/components/ShopCart/ShopCart";
 import CartControl from "@/components/CartControl/CartControl";
+import ImageLoading from "@/common/ImageLoading/ImageLoading";
 export default {
   props: {
     storeItem: {
@@ -68,13 +74,13 @@ export default {
       };
       this.scroller.menu = new BScroll(this.$refs.menuwrapper, params);
       this.scroller.goods = new BScroll(this.$refs.goodswrapper, params);
-      this.scroller.goods.on('scroll', ({ y }) => {
+      this.scroller.goods.on("scroll", ({ y }) => {
         this.scrollY = Math.abs(Math.floor(y));
       });
       this.computeScroll();
     });
   },
-  beforeDestroy(){
+  beforeDestroy() {
     this.scroller.menu.destroy();
     this.scroller.goods.destroy();
   },
@@ -87,15 +93,16 @@ export default {
   },
   components: {
     ShopCart,
+    ImageLoading,
     CartControl
   },
   computed: {
     currentIndex() {
       const scrollY = this.scrollY;
-      for (let i = 0, heights = this.goodsHeight; i < heights.length; i++){
-        let height1 = heights[ i ];
-        let height2 = heights[ i + 1 ];
-        if ( !height2 || ( scrollY >= height1 && scrollY < height2 ) ) {
+      for (let i = 0, heights = this.goodsHeight; i < heights.length; i++) {
+        let height1 = heights[i];
+        let height2 = heights[i + 1];
+        if (!height2 || (scrollY >= height1 && scrollY < height2)) {
           this.scrollToMenu(i);
           return i;
         }
@@ -103,32 +110,28 @@ export default {
       return 0;
     },
     typeClass() {
-      const icons = [
-        'decrease_3',
-        'discount_3',
-        'special_3'
-      ]
-      return (type) => ({
-        [icons[type-1]]: true
-      })
+      const icons = ["decrease_3", "discount_3", "special_3"];
+      return type => ({
+        [icons[type - 1]]: true
+      });
     }
   },
   methods: {
     scrollToGoods(index) {
-      this.scroller.goods.scrollToElement( this.$refs.goodslist[index], 300);
+      this.scroller.goods.scrollToElement(this.$refs.goodslist[index], 300);
     },
     scrollToMenu(index) {
-      this.scroller.menu.scrollToElement( this.$refs.menulist[index], 300, -100);
+      this.scroller.menu.scrollToElement(this.$refs.menulist[index], 300, -100);
     },
     computeScroll() {
       const heights = [];
       const doms = this.$refs.goodslist;
       if (!doms) {
-        return ;
+        return;
       }
       let h = 0;
       for (const dom of doms) {
-        heights.push( h );
+        heights.push(h);
         h += dom.offsetHeight;
       }
       this.goodsHeight = heights;
@@ -138,14 +141,14 @@ export default {
     storeItem() {
       this.$nextTick(() => {
         this.computeScroll();
-      })
+      });
     }
   }
 };
 </script>
 
 <style lang="scss">
-@import '../../style/mixin.scss';
+@import "../../style/mixin.scss";
 .goods {
   position: absolute;
   left: 0;
@@ -155,11 +158,11 @@ export default {
   display: flex;
   padding-bottom: 50px;
   background-color: $white;
-  .goods-left{
+  .goods-left {
     width: 80px;
     background-color: #f3f5f7;
     overflow: hidden;
-    .menu-wrap{
+    .menu-wrap {
       position: relative;
       width: 56px;
       height: 54px;
@@ -169,10 +172,10 @@ export default {
         margin-top: -1px;
         background-color: $white;
         border-top: 1px solid #fff;
-        & .menu-cell::after{
+        & .menu-cell::after {
           border-color: $white;
         }
-        & .menu-cell .menu-name{
+        & .menu-cell .menu-name {
           font-weight: 500;
         }
       }
@@ -188,7 +191,7 @@ export default {
           height: 15px;
           vertical-align: top;
         }
-        .menu-name{
+        .menu-name {
           font-weight: 200;
           color: rgb(7, 17, 24);
         }
@@ -243,23 +246,23 @@ export default {
         }
         .price-wrap {
           text-align-last: justify;
-          .price{
+          .price {
             display: inline-block;
             vertical-align: middle;
-            .new-price{
+            .new-price {
               font-size: 14px;
               line-height: 24px;
               color: $red;
               font-weight: 700;
             }
-            .old-price{
+            .old-price {
               font-size: 10px;
               line-height: 14px;
               color: $gray;
               font-weight: 700;
               text-decoration: line-through;
-            } 
-          }    
+            }
+          }
         }
       }
     }
