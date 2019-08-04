@@ -24,7 +24,7 @@
           <ul class="goods-wrap">
             <li v-for="food in item.foods" :key="food.id" class="goods-item">
               <div class="image-wrap">
-                <ImageLoading :src="food.image" />
+                <img :src="food.image" />
               </div>
               <div class="goods-info">
                 <div class="title">{{food.name}}</div>
@@ -57,8 +57,11 @@
 import BScroll from "better-scroll";
 import ShopCart from "@/components/ShopCart/ShopCart";
 import CartControl from "@/components/CartControl/CartControl";
-import ImageLoading from "@/common/ImageLoading/ImageLoading";
 export default {
+  components: {
+    ShopCart,
+    CartControl
+  },
   props: {
     storeItem: {
       type: Object,
@@ -90,11 +93,6 @@ export default {
       scrollY: 0,
       scroller: {}
     };
-  },
-  components: {
-    ShopCart,
-    ImageLoading,
-    CartControl
   },
   computed: {
     currentIndex() {

@@ -1,17 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
-import { AsyncComponent } from './async';
-import store from './Store/route';
-const City = () => AsyncComponent(import(/* webpackChunkName: "City" */ "./City/City"));
+import { AsyncComponent } from "./async";
+import storeRoute from "./Store/route";
+const City = () =>
+  AsyncComponent(import(/* webpackChunkName: "City" */ "./City/City"));
 const Home = () =>
   AsyncComponent(import(/* webpackChunkName: "Home" */ "./Home/Home"));
 const Search = () =>
-  import(/* webpackChunkName: "Search" */ "./Search/Search");
-const Channel = () =>
-  AsyncComponent(import(/* webpackChunkName: "Channel" */ "./Channel/Channel"));
-
+  AsyncComponent(import(/* webpackChunkName: "Search" */ "./Search/Search"));
 const ErrorView = () =>
-  import(/* webpackChunkName: "Error" */ "./Error/Error");
+  AsyncComponent(import(/* webpackChunkName: "Error" */ "./Error/Error"));
 
 Vue.use(Router);
 
@@ -21,7 +19,7 @@ const router = new Router({
       path: "/",
       redirect: "/home"
     },
-    store,
+    storeRoute,
     {
       path: "/city",
       name: "city",
@@ -36,11 +34,6 @@ const router = new Router({
       path: "/search",
       name: "search",
       component: Search
-    },
-    {
-      path: "/channel",
-      name: "channel",
-      component: Channel
     },
     {
       path: "/error",

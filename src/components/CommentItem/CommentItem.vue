@@ -2,7 +2,7 @@
   <ul class="comments">
     <li class="comment-item" v-for="(cmt, i) in _comments" :key="i">
       <div class="comment-item__head">
-        <ImageLoading :src="cmt.userPicUrl"></ImageLoading>
+        <img :src="cmt.userPicUrl"/>
       </div>
       <div class="comment-item__content">
         <div class="comment-item__cont">
@@ -31,12 +31,8 @@
 </template>
 
 <script>
-import ImageLoading from '@/common/ImageLoading/ImageLoading';
 
 export default {
-  components: {
-    ImageLoading
-  },
   props: {
     comments: {
       type: Array,

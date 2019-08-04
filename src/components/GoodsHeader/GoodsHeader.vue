@@ -5,7 +5,7 @@
     </div>
     <div class="header-hd clear">
         <div class="avatar-wrap">
-          <ImageLoading :src="storeItem.avatar"></ImageLoading>
+          <img :src="storeItem.avatar"/>
         </div>
         <div class="info-wrap">
             <div class="info-title">
@@ -26,12 +26,8 @@
 
 <script>
 import { setTimeout } from 'timers';
-import ImageLoading from '@/common/ImageLoading/ImageLoading';
 
 export default {
-  components: {
-    ImageLoading
-  },
   props: {
     storeItem: {
       type: Object,

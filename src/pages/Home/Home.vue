@@ -45,7 +45,7 @@ export default {
       this.getPositionAction(this.$route.params) 
     ]);
     
-    this.storeList = storeList.data
+    this.storeList = Object.freeze(storeList.data);
 
     this.$router.replace(`/home/${this.currentCity.pinyin}`);
   },

@@ -1,24 +1,18 @@
 <template>
-  <img src="@assets/img/image_loading.jpg" ref="img"/>
+  <img :src="loadSrc"/>
 </template>
 <script>
+import loadSrc from '@assets/img/image_loading.jpg';
 
 export default {
   props: ['src'],
   data() {
     return {
-      newSrc: '@assets/img/image_loading.jpg'
+      loadSrc
     }
   },
   created() {
-    let img = new Image();
-    img.addEventListener('load', () => {
-      this.$refs.img.src = this.src;
-      img = null;
-    })
-    if (this.src) {
-      img.src = this.src;
-    }
+    console.log(this.src);
   }
 };
 
