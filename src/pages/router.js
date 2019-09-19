@@ -1,15 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
-import { AsyncComponent } from "./async";
 import storeRoute from "./Store/route";
 const City = () =>
-  AsyncComponent(import(/* webpackChunkName: "City" */ "./City/City"));
+  import(/* webpackChunkName: "City" */ "./City/City");
 const Home = () =>
-  AsyncComponent(import(/* webpackChunkName: "Home" */ "./Home/Home"));
+  import(/* webpackChunkName: "Home" */ "./Home/Home");
 const Search = () =>
-  AsyncComponent(import(/* webpackChunkName: "Search" */ "./Search/Search"));
+  import(/* webpackChunkName: "Search" */ "./Search/Search");
 const ErrorView = () =>
-  AsyncComponent(import(/* webpackChunkName: "Error" */ "./Error/Error"));
+  import(/* webpackChunkName: "Error" */ "./Error/Error");
 
 Vue.use(Router);
 

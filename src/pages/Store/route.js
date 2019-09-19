@@ -1,8 +1,7 @@
-import { AsyncComponent } from '../async';
-let Store = () => AsyncComponent(import(/* webpackChunkName: "Store" */ './Store'));
-let Goods = () => AsyncComponent(import(/* webpackChunkName: "Goods" */'./Goods'));
-let Comment = () => AsyncComponent(import(/* webpackChunkName: "Comment" */'./Comment'));
-let ShopDetail = () => AsyncComponent(import(/* webpackChunkName: "ShopDetail" */'./ShopDetail'));
+let Store = () => import(/* webpackChunkName: "Store" */ './Store');
+let Goods = () => import(/* webpackChunkName: "Goods" */'./Goods');
+let Comment = () => import(/* webpackChunkName: "Comment" */'./Comment');
+let ShopDetail = () => import(/* webpackChunkName: "ShopDetail" */'./ShopDetail');
 
 export default {
   path: "/store",
