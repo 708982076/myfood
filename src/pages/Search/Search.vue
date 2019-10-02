@@ -26,7 +26,9 @@ export default {
     SeachList
   },
   async created() {
-    
+    const {data} = await getStoreList();
+    this.guesslike_stores = Object.freeze(data);
+    this.nearby_stores = data.slice().reverse();
   },
   data() {
     return {

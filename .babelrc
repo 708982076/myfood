@@ -3,14 +3,19 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "node": "current"
-        },
-        "modules": false 
+        "modules": false
       }
     ]
   ],
   "plugins": [
-    "@babel/plugin-transform-modules-commonjs"
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ],
+    "@babel/plugin-transform-modules-commonjs",
+    "@babel/plugin-transform-runtime"
   ]
 }

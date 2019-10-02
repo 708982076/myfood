@@ -1,5 +1,3 @@
-import { baseURL } from 'root/config'
-import { totalmem } from 'os';
 const storagefactory = {
   session: sessionStorage,
   local: localStorage
@@ -41,78 +39,6 @@ export function debounce(func, delay) {
     }, delay)
   }
 }
-export const request = async (url, data = {}, method = 'GET') => {
-  url = baseURL + url;
-  method = method.toUpperCase();
-  if (method === 'GET') {
-    let dataUrl = '';
-    Object.keys(data).forEach(key => {
-      dataUrl += `${key}=${data[key]}&`;
-    })
-    if (dataUrl) {
-      dataUrl = dataUrl.slice(0, -1);
-      url += '?' + dataUrl;
-    }
-  }
-  if (window.fetch) {
-    let fetchOptions = {
-      method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      mode: "cors",
-			cache: "no-cache"
-    }
-
-    if (method === 'POST') {
-      Object.defineProperty(fetchOptions, 'body', {
-        value: JSON.stringify(data)
-      })
-    }
-
-    try {
-			const response = await fetch(url, fetchOptions);
-			const responseJson = await response.json();
-			return responseJson;
-		} catch (error) {
-			throw new Error(error);
-    }
-  }else {
-    return new Promise((resolve, reject) => {
-			let requestObj;
-			if (window.XMLHttpRequest) {
-				requestObj = new XMLHttpRequest();
-			} else {
-				requestObj = new ActiveXObject;
-			}
-
-			let sendData = '';
-			if (method == 'POST') {
-				sendData = JSON.stringify(data);
-			}
-
-			requestObj.open(method, url, true);
-			requestObj.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			requestObj.send(sendData);
-
-			requestObj.onreadystatechange = () => {
-				if (requestObj.readyState == 4) {
-					if (requestObj.status == 200) {
-						let obj = requestObj.response
-						if (typeof obj !== 'object') {
-							obj = JSON.parse(obj);
-						}
-						resolve(obj)
-					} else {
-						reject(requestObj)
-					}
-				}
-			}
-		})
-  }
-} 
 export const cookieUtils = {
   getCookie(key) {
     const cookie = document.cookie;

@@ -1,7 +1,7 @@
 <template>
-  <el-tabs type="border-card" :value="name">
+  <el-tabs type="border-card" :value="name" stretch>
     <el-tab-pane :label="item.label" :name="item.name" v-for="item in tabItems" :key="item.name">
-      <div v-if="item.data.length == 0">无结果</div>
+      <div v-if="item.data.length == 0" style="text-align: center">无结果</div>
       <ShopInfo v-else v-for="store in item.data" :store="store" :key="store._id"/>
     </el-tab-pane>
   </el-tabs>

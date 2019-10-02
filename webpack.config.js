@@ -34,48 +34,19 @@ const webpackConfig = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        use: ['babel-loader']
+      },
+      {
         test: /\.(sc|c)ss$/,
         use: [
           _modeFlag ?
             MiniCssExtractPlugin.loader:
             'vue-style-loader',
-          {
-            // loader: "css-loader?sourceMap"
-            loader: "css-loader"
-          },
-          {
-            loader: 'sass-loader',
-            // options: {
-            //   sourceMap: true,
-            //   sourceMapContents : true
-            // }
-          }
+
+          "css-loader",'sass-loader'
         ]
       },
-      // {
-      //   test: /\.less$/,
-      //   use: [
-      //     _modeFlag ?
-      //       MiniCssExtractPlugin.loader:
-      //       'vue-style-loader',
-      //     {
-      //       loader: "css-loader",
-      //     },
-      //     {
-      //       loader: 'less-loader',
-      //       options: {
-      //         javascriptEnabled: true
-      //       }
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: 10000
-      //   }
-      // },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: [
