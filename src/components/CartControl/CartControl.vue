@@ -1,10 +1,14 @@
 <template>
   <div class="cart-control">
     <transition name="move">
-      <i class="icon-remove_circle_outline decrease" @click="decreaseCount" v-if="data.count > 0"></i>
+      <span class="cart-control-btn decrease" v-if="data.count > 0">
+        <i class="el-icon-minus" @click="decreaseCount"></i>
+      </span>
     </transition>
     <span class="num" v-if="data.count > 0">{{data.count}}</span>
-    <i class="icon-add_circle add" @click="addCart"></i>
+    <span class="cart-control-btn">
+      <i class="el-icon-plus add" @click="addCart"></i>
+    </span>
   </div>
 </template>
 
@@ -53,17 +57,25 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../style/mixin.scss";
+@import "@/style/mixin.scss";
 .cart-control {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &-btn {
+    width: 25px;
+    height: 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 20px;
+    background: $primary;
+    .el-icon-minus, .el-icon-plus{
+      color: #fff;
+    }
+  }
   .decrease {
-    display: inline-block;
-    padding: 5px;
-    color: orange;
-    font-size: 28px;
-    vertical-align: middle;
     &.move-enter-active,
     &.move-leave-active {
       transition: all 0.4s linear;
@@ -74,21 +86,11 @@ export default {
       opacity: 0;
     }
   }
-  .add {
-    display: inline-block;
-    padding: 5px;
-    color: orange;
-    font-size: 28px;
-    vertical-align: middle;
-  }
   .num {
-    display: inline-block;
-    width: 18px;
+    flex:1;
+    padding: 0 5px;
     font-size: 10px;
     color: $gray;
-    line-height: 28px;
-    text-align-last: center;
-    vertical-align: middle;
   }
 }
 </style>

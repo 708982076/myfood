@@ -1,0 +1,123 @@
+.goods {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 166px;
+  bottom: 0;
+  display: flex;
+  padding-bottom: 50px;
+  background-color: $white;
+  .goods-left {
+    width: 80px;
+    background-color: #f3f5f7;
+    overflow: auto;
+    .menu-wrap {
+      position: relative;
+      width: 56px;
+      height: 54px;
+      padding: 0 12px;
+      font-size: 12px;
+      & .current {
+        margin-top: -1px;
+        background-color: $white;
+        border-top: 1px solid #fff;
+        & .menu-cell::after {
+          border-color: $white;
+        }
+        & .menu-cell .menu-name {
+          font-weight: 500;
+        }
+      }
+      .menu-cell {
+        display: table-cell;
+        width: 56px;
+        height: 54px;
+        text-align: center;
+        vertical-align: middle;
+        .menu-icon {
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          vertical-align: top;
+        }
+        .menu-name {
+          font-weight: 200;
+          color: rgb(7, 17, 24);
+        }
+      }
+    }
+  }
+  .goods-right {
+    flex: 1;
+    overflow: auto;;
+    .goods-title {
+      padding-left: 12px;
+      background-color: #f3f5f7;
+      border-left: 2px solid #d9dde1;
+      font-size: 12px;
+      color: $gray;
+      line-height: 26px;
+    }
+    .goods-item {
+      display: flex;
+      padding: 18px;
+      .image-wrap {
+        float: left;
+        height: 100%;
+        margin-right: 10px;
+        img {
+          width: 64px;
+          height: 64px;
+        }
+      }
+      .goods-info {
+        overflow: hidden;
+        flex: 1;
+        .title {
+          font-size: 14px;
+          color: rgb(7, 17, 27);
+          margin-bottom: 8px;
+          margin-top: 2px;
+          font-weight: 700;
+        }
+        .desc-wrapper {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          .desc {
+            font-size: 10px;
+            color: rgb(7, 17, 27);
+            margin-bottom: 8px;
+            margin-top: 2px;
+            font-weight: 700;
+          }
+        }
+        .sell {
+          font-size: 10px;
+          color: $gray;
+          .sell-count {
+            margin-right: 8px;
+          }
+        }
+        .price-wrap {
+          display: flex;
+          align-items: center;
+          .price {
+            flex: 1;
+            .new-price {
+              color: $red;
+              font-weight: 700;
+            }
+            .old-price {
+              font-size: 10px;
+              line-height: 14px;
+              color: $gray;
+              font-weight: 700;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,16 +2,17 @@
   <div class="shopcart">
     <div class="content">
       <div class="content-left">
-        <div class="cart" @click="toggleShow" :class="{ light: cartCount > 0 }">
-          <i class="icon-shopping_cart cart-icon"></i>
-          <span class="totalCount" v-if="cartCount > 0">{{ cartCount }}</span>
-        </div>
+        <el-badge :value="cartCount" class="cart" :hidden="cartCount === 0"
+           :class="{ light: cartCount > 0 }"
+        >
+          <i class="el-icon-shopping-cart-2 cart-icon" @click="toggleShow"></i>
+        </el-badge>
         <div class="prices">
           <span class="price" :class="{ light: shopcartPricetotal > 0 }">￥{{ shopcartPricetotal }}</span>
           <span
             class="freight"
             :class="{ remove: payPass }"
-          >另需配送费￥{{ ( payPass ) ? 0 : deliveryPrice }}元</span>
+          >另需配送费￥{{ payPass ? 0 : deliveryPrice }}元</span>
         </div>
       </div>
       <div class="content-right">
@@ -19,7 +20,7 @@
           class="buy"
           :class="{ light: payPass }"
           @click="payhandle"
-        >{{ payPass ? '支付' : '还差￥' + ( _sum( minPrice - shopcartPricetotal, 1 ) ) + '起送' }}</div>
+        >{{ payPass ? '支付' : '还差￥' + _sum( minPrice - shopcartPricetotal, 1 ) + '起送' }}</div>
       </div>
     </div>
     <div class="list" :class="{ move: isShow }">
@@ -97,7 +98,7 @@ export default {
       const len = this.curShopcart.length;
       if (this.shopCartLen !== len) {
         if (len === 0) this.isShow = false;
-        this.shopCartLen = len;
+        this.shopCartLen = len; 
         this.$nextTick(() => {
           this.sroller.refresh();
         });
@@ -105,7 +106,7 @@ export default {
       return this.shopcartCount;
     },
     payPass() {
-      return this.shopcartPricetotal >= this.minPrice;
+      return this.shopcartPricetotal >= this.minPrice && this.shopcartCount !== 0;
     }
   },
   data() {
@@ -115,11 +116,9 @@ export default {
       shopCartLen: 0
     };
   },
-  created() {
-    this.$nextTick(() => {
-      this.sroller = new BS(this.$refs.listContent, {
-        click: true
-      });
+  mounted() {
+    this.sroller = new BS(this.$refs.listContent, {
+      click: true
     });
   },
   beforeDestroy() {
@@ -158,7 +157,7 @@ export default {
         text-align: center;
         color: #80858a;
         &.light {
-          background-color: orange;
+          background-color: $primary;
           color: $white;
           .cart-icon {
             color: rgba(255, 255, 255, 1);
@@ -186,13 +185,14 @@ export default {
         }
       }
       .prices {
-        float: left;
-        line-height: 48px;
-        font-size: 16px;
+        display: inline-flex;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
         .price {
           margin-left: 18px;
           padding-right: 12px;
-          font-size: 16px;
+          font-size: 14px;
           color: rgba(255, 255, 255, 0.4);
           font-weight: 700;
           border-right: 1px solid #262e38;
@@ -223,7 +223,7 @@ export default {
         font-weight: 700;
         color: rgba(255, 255, 255, 0.4);
         &.light {
-          background-color: orange;
+          background-color: $primary;
           color: $white;
         }
       }
@@ -262,22 +262,21 @@ export default {
       max-height: 200px;
       overflow: hidden;
       .list-item {
+        display: flex;
         height: 48px;
-        text-align-last: justify;
         padding: 0 18px;
         line-height: 48px;
-        border: 1px solid rgba(7, 17, 27, 0.1);
         font-size: 14px;
         .food-name {
-          display: inline-block;
+          flex: 1;
           color: rgb(7, 17, 27);
         }
         .food-price {
-          display: inline-block;
           .price {
+            margin-right: 5px;
             font-weight: 700;
             color: rgb(240, 20, 20);
-            vertical-align: middle;
+            line-height: 48px;
           }
         }
       }

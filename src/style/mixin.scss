@@ -3,6 +3,8 @@ $black: rgb(7, 17, 27);
 $gray: rgb(147, 153, 159);
 $red: rgb(240, 20, 20);
 $blue: rgb(0, 160, 220);
+$primary: #409EFF;
+$primary_light: #66b1ff;
 
 @mixin bg-image($url){
   background-image:url("~@assets/images/" + $url + "@2x.png");
@@ -16,6 +18,11 @@ $blue: rgb(0, 160, 220);
 }
 
 // 背景图片地址和大小
+@mixin breakPoint {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 @mixin bis($url) { 
 	background-image: url($url);
 	background-repeat: no-repeat;

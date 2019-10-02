@@ -1,0 +1,74 @@
+.comment {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 166px;
+  bottom: 0;
+  background-color: #efefef;
+  .comment-wrapper{
+    overflow: auto;
+  }
+  .seller-score {
+    position: relative;
+    height: 100px;
+    background-color: $white;
+    border-bottom: 1px solid #eee;
+    .score-lf {
+      position: absolute;
+      width: 26%;
+      padding-top: 20px;
+      text-align: center;
+      .score-data-lf {
+        color: orange;
+        font-size: 28px;
+      }
+      .score-title-lf {
+        font-size: 14px;
+      }
+    }
+    .score-mid {
+      margin-left: 26%;
+      margin-right: 26%;
+      padding-top: 26px;
+      text-align: center;
+      .min-wraper {
+        display: inline-block;
+      }
+      .mid-t,
+      .mid-b {
+        font-size: 0;
+        text-align: left;
+      }
+      .mid-title {
+        font-size: 14px;
+      }
+      .mid-score {
+        font-size: 14px;
+        color: orange;
+      }
+    }
+    .score-rt {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-top: 20px;
+      width: 26%;
+      text-align: center;
+      border-left: 1px solid #aaa;
+      .score-data-rt {
+        color: #aaa;
+        font-size: 28px;
+      }
+      .score-title-rt {
+        color: #aaa;
+        font-size: 14px;
+      }
+    }
+  }
+  .users-comment {
+    padding: 0 20px;
+    margin-top: 10px;
+    background-color: #fff;
+  }
+}

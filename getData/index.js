@@ -1,9 +1,21 @@
-import { request } from 'lib/utils';
+import {create} from 'axios';
+import {baseURL} from 'root/config';
 
-export const getAllCity = () => request('/city');
-export const getLocation = (query) => request('/location', query);
-export const getStoreItem = (id) => request('/storeItem', { id });
-export const getStoreList = () => request('/store');
-export const getStoreInfo = (id) => request('/storeinfo', {id});
-export const getStoreComment = (id) => request('/storecomment', {id});
-export const storeWordSerach = (keyword) => request('/storeWordSerach', {keyword});
+let instance = create({baseURL})
+const {get} = instance;
+instance.interceptors.response.use((res) => {
+  let {message, code} = res.data;
+  if (code == 0) {
+    return res.data;
+  }else {
+    return Promise.reject(message);
+  }
+}); 
+
+export const getAllCity = () => get('/city');
+export const getLocation = (query) => get('/location', {params: {query}});
+export const getStoreItem = (id) => get('/storeItem', { params: {id} });
+export const getStoreList = () => get('/store');
+export const getStoreInfo = (id) => get('/storeinfo', { params: {id} });
+export const getStoreComment = (id) => get('/storecomment', { params: {id} });
+export const storeWordSerach = (keyword) => get('/storeWordSerach', { params: {keyword} });

@@ -1,11 +1,12 @@
 <template>
-  <ul class="comment-label clear">
-    <li class="comment-label__Itag" 
-      :class="{ 'comment-label__Itag--active': index === i }"
-      v-for="(label, i) in _labels" :key="i"
-      @click="changeLabel(i, $event)"
-    >{{label.content}}</li>
-  </ul>
+  <div class="comment-label clear">
+    <el-badge type="primary" :max="99"
+      :value="+label.count" v-for="(label, i) in _labels" :key="i"
+      class="comment-label__Itag"
+    >
+      <el-button size="small" @click="changeLabel(i, $event)">{{label.content}}</el-button>
+    </el-badge>
+  </div>
 </template>
 
 <script>
@@ -29,7 +30,13 @@ export default {
   },
   computed: {
     _labels() {
-      return this.labels;
+      return this.labels.map((e) => {
+        return {
+          ...e,
+          content: e.content.match(/[^()\d]+/)[0],
+          count: e.content.match(/\d+/)[0]
+        }
+      })
     }
   }
 };
@@ -40,20 +47,8 @@ export default {
   padding: 20px 0;
   border-bottom: 1px solid #f3f3f3;
   &__Itag {
-    margin: 3px 5px;
-    padding: 0 10px;
-    float: left;
-    height: 24px;
-    line-height: 24px;
-    font-size: 14px;
-    border: 1px solid #dbdbdb;
-    color: #6b6b6b;
-    border-radius: 20px;
-    &--active {
-      border: 1px solid #ffb511;
-      background-color: #fffbf1;
-      color: #ffb511;
-    }
+    margin-right: 25px;
+    margin: 5px 12px;
   }
 }
 </style>

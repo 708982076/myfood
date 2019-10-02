@@ -2,7 +2,7 @@
   <div class="shop-info">
     <router-link clsss="shop-wrapper" :to="{ path: '/store', query:{ id: store._id } }">
       <div class="avatar">
-        <img :src="store.avatar">
+        <el-image :src="store.avatar"></el-image>
       </div>
       <div class="info">
         <h2 class="shop-title">{{store.name}}</h2>
@@ -23,7 +23,6 @@
             <span class="vertical">|</span>
           </span>
           <span class="delivery-price">配送￥{{store.deliveryPrice}}</span>
-          <i class="description">{{store.description}}</i>
         </div>
       </div>
     </router-link>
@@ -50,33 +49,36 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/style/mixin.scss';
+
 .shop-info {
-  margin: 0 0.5rem;
-  padding: 0.5rem 0;
-  height: 3.5rem;
+  height: 80px;
+  padding: 8px;
   overflow: hidden;
-  border-bottom: 1px solid #ccc;
+  & + & {
+    border-top: 1px solid #ccc;
+  }
   .avatar {
-    position: absolute;
-    width: 5rem;
-    height: 3.5rem;
+    float: left;
+    width: 100px;
+    height: 75px;
     border: 1px solid #ccc;
     overflow: hidden;
     img {
-        width: 100%;
+      width: 100%;
     }
   }
   .info {
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
-    margin-left: 5.3rem;
-    height: 100%;
     justify-content: center;
-    text-align: left;
+    overflow: hidden;
     .shop-title {
       flex: 1;
-      font-size: .8rem;
+      font-size: 16px;
       font-weight: bold;
+      @include breakPoint();
     }
     .shop-mid span,
     .shop-mid-btm span {
@@ -84,35 +86,28 @@ export default {
     }
     .shop-mid {
       flex: 1;
-      margin-top: 0.3rem;
+      margin: 6px 0;
       .mid-left {
         float: left;
-        line-height: 2;
-        font-size: 0.6rem;
       }
       .mid-right {
         float: right;
-        line-height: 2;
-        font-size: 0.6rem;
         color: #fff;
       }
     }
     .shop-mid-btm {
       flex: 1;
-      margin-top: 0.2rem;
-      font-size: 0.7rem;
       .min-price {
         float: left;
       }
       .vertical {
-        margin-right: 7px;
+        // margin-right: 7px;
       }
       .delivery-price {
         float: left;
       }
       .description {
         float: right;
-        padding: 0.1rem 0.2rem;
         background-color: orange;
         color: #333;
       }

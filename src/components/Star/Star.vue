@@ -29,8 +29,6 @@ export default {
 <style lang="scss">
 @import "@/style/mixin.scss";
 .rating {
-  margin-left: 5px;
-  margin-right: 5px;
   i {
     display: inline-block;
     width: 12px;

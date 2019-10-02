@@ -28,12 +28,13 @@ const webpackConfig = {
   },
   devServer: {
     port: 8000,
-    open:true
+    open:true,
+    historyApiFallback: true
   },
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(sc|c)ss$/,
         use: [
           _modeFlag ?
             MiniCssExtractPlugin.loader:

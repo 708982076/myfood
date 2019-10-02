@@ -131,3 +131,9 @@ html,body{
 .special_3 {
   @include bg-image('special_3');           
 }
+.icon-midsize {
+    font-size: 16px
+}
+.icon-fff {
+    color: #fff;
+}

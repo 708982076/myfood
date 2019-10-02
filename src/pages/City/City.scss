@@ -1,0 +1,40 @@
+.city-li {
+  & ~ & {
+    border-top: 1px solid #ddd8ce;
+  }
+  &-item{
+    text-align: center;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-right: 1px solid #ddd8ce;
+  }
+  &-link{
+    padding: 3px 10px;
+    &--letter {
+      color: #409EFF;
+    }
+  }
+}
+
+.city-wrapper {
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #ddd8ce;
+}
+
+.letters {
+  border-bottom: 1px solid #ddd8ce;
+  .city-li-item {
+    border-right: none;
+  }
+}
+
+.letter {
+  position: absolute;
+  width: 25%;
+  line-height: 60px;
+  text-align: center;
+  background: #fff;
+}

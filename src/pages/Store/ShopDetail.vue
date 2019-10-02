@@ -3,7 +3,7 @@
     <div class="detail-t">
       <div class="detail-item">
         <div class="detail-left">
-          <i class="icon iconfont icon-size icon-dizhiguanli"></i>
+          <i class="el-icon-location icon-midsize icon-margin-r"></i>
         </div>
         <div class="detail-right">
           <span>{{info.shopAddress}}</span>
@@ -11,7 +11,7 @@
       </div>
       <div class="detail-item">
         <div class="detail-left">
-          <i class="icon iconfont icon-size icon-kefu"></i>
+          <i class="el-icon-phone icon-midsize icon-margin-r"></i>
         </div>
         <div class="detail-right">
           <span v-for="(p, i) in phone" :key="i">{{p}}&nbsp;</span>
@@ -21,7 +21,7 @@
     <div class="detail-c">
       <div class="detail-item">
         <div class="detail-left">
-          <i class="icon iconfont icon-size icon-daishouhuo"></i>
+          <i class="el-icon-s-help icon-midsize icon-margin-r"></i>
         </div>
         <div class="detail-right">
           <span>配送服务：美团外卖</span>
@@ -29,7 +29,7 @@
       </div>
       <div class="detail-item">
         <div class="detail-left">
-          <i class="icon iconfont icon-size icon-tishishuoming"></i>配送时间：
+          <i class="el-icon-message-solid icon-midsize icon-margin-r"></i>配送时间：
         </div>
         <div class="detail-right">
           <span v-if="serTime.morning">{{'上午：' + serTime.morning}}</span>
@@ -41,7 +41,7 @@
     <div class="shop-activity">
       <div class="detail-item">
         <div class="detail-left">
-          <i class="icon iconfont icon-size icon-dingdan"></i>
+          <i class="el-icon-s-order icon-midsize icon-margin-r"></i>
         </div>
         <div class="detail-right">
           <span>{{info.tip}}</span>
@@ -105,9 +105,8 @@ export default {
     bottom: 0;
     background-color: #fff;
     font-size: 14px;
-    .icon-size {
-      margin-right: 10px;
-      color: #000;
+    .icon-margin-r {
+      margin-right: 5px;
     }
     .detail-c {
       padding: 15px 0; 

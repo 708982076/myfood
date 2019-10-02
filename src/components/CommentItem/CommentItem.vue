@@ -2,7 +2,7 @@
   <ul class="comments">
     <li class="comment-item" v-for="(cmt, i) in _comments" :key="i">
       <div class="comment-item__head">
-        <img :src="cmt.userPicUrl"/>
+        <el-avatar :src="cmt.userPicUrl"></el-avatar>
       </div>
       <div class="comment-item__content">
         <div class="comment-item__cont">
@@ -15,18 +15,17 @@
         <div class="comment-item__text">{{cmt.content}}</div>
         <ul class="comment-item__img">
           <li 
-            v-for="(pic, i) in cmt.pictures" 
+            v-for="pic in cmt.pictures" 
             :key="pic.smallPicUrl"
-            @click="picByClick(cmt.pictures, i, $event)"
           >
-            <img :src="pic.smallPicUrl"/>
+            <el-image
+              :src="pic.smallPicUrl" 
+              :preview-src-list="cmt.pictures.map(e => e.bigPicUrl)">
+            </el-image>
           </li>
         </ul>
       </div>
     </li>
-    <div class="loadupitem" v-if="isloadup">
-      <i class="icon iconfont icon-huanyihuan"></i>
-    </div>
   </ul>
 </template>
 
@@ -37,23 +36,11 @@ export default {
     comments: {
       type: Array,
       required: true
-    },
-    isloadup: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
     _comments() {
       return this.comments;
-    }
-  },
-  methods: {
-    picByClick(imgs, i) {
-      imgs = imgs.map(item => {
-        return item.bigPicUrl;
-      })
-      this.$emit('piclick', imgs, i);
     }
   }
 };
@@ -75,13 +62,8 @@ export default {
   }
   &__head {
     float: left;
-    width: 15%;
     height: 50px;
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
+    margin-right: 20px;
   }
   &__item {
     line-height: 14px;
@@ -103,7 +85,7 @@ export default {
     font-size: 12px;
   }
   &__content {
-    margin-left: 15%;
+    overflow: hidden;
   }
   &__text {
     margin: 10px 0;
@@ -112,6 +94,9 @@ export default {
   }
   &__img {
     overflow: hidden;
+    .el-icon-circle-close {
+      color: rgba(255,255,255,.8);
+    }
     li {
       float: left;
       width: 90px;

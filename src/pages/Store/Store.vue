@@ -1,7 +1,7 @@
 <template>
   <div class="store-page">
     <a class="back-icon" href="javascript:history.back()">
-      <i class="iconfont icon-fanhui"></i>
+      <i class="el-icon-arrow-left icon-fff"></i>
     </a>
     <GoodsHeader :storeItem="storeItem"></GoodsHeader>
     <div class="tab" id="tab-select">
@@ -136,7 +136,7 @@ export default {
         width: 100%;
         line-height: 40px;
         &.active {
-          border-bottom: 2px solid orange;
+          border-bottom: 2px solid $primary;
         }
       }
     }

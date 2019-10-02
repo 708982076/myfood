@@ -5,7 +5,7 @@
     </div>
     <div class="header-hd clear">
         <div class="avatar-wrap">
-          <img :src="storeItem.avatar"/>
+          <img :src="storeItem.avatar" style="object-fit: cover">
         </div>
         <div class="info-wrap">
             <div class="info-title">
@@ -122,13 +122,14 @@ export default {
     }
   }
   .background{
-    position: relative;
-    filter: blur(8px);
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    filter: blur(2px);
     opacity: .6;
     img {
-      position: absolute;
-      margin-top: -30%;
+      height: 100%;
       width: 100%;
+      object-fit: cover;
     }
   }
 }
