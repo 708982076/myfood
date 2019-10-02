@@ -3,9 +3,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   output: {
     filename: "scripts/[name].[hash:5].bundle.js",
-    publicPath: '/myfood/dist'
+    publicPath: '/myfood/dist/'
   },
   plugins: [
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 }
