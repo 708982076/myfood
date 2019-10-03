@@ -16,6 +16,21 @@ export const getAllCity = () => get('/city');
 export const getLocation = (query) => get('/location', {params: {query}});
 export const getStoreItem = (id) => get('/storeItem', { params: {id} });
 export const getStoreList = () => get('/store');
-export const getStoreInfo = (id) => get('/storeinfo', { params: {id} });
-export const getStoreComment = (id) => get('/storecomment', { params: {id} });
-export const storeWordSerach = (keyword) => get('/storeWordSerach', { params: {keyword} });
+export const getStoreInfo = async (id) => {
+  let {data} = await get('/storeInfo');
+  return { data: data.filter(i => i._id === id)[0] };
+};
+export const getStoreComment = async (id) => {
+  const {data} = await get('/storeComment');
+  return {
+    data: data.filter(c => c._id === id)[0]
+  };
+};
+export const storeWordSerach = async (keyword) => {
+  const {data} = await getStoreList();
+  return {
+    data: data.filter(store => {
+      return store.name.toLowerCase().includes(decodeURIComponent(keyword))
+    })
+  }
+};
