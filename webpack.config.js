@@ -35,7 +35,8 @@ const webpackConfig = {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
+        include: [path.resolve('src')]
       },
       {
         test: /\.(sc|c)ss$/,
