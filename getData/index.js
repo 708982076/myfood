@@ -14,7 +14,10 @@ instance.interceptors.response.use((res) => {
 
 export const getAllCity = () => get('/city');
 export const getLocation = (query) => get('/location', {params: {query}});
-export const getStoreItem = (id) => get('/storeItem', { params: {id} });
+export const getStoreItem = async (id) => {
+  let {data} = await get('/store');
+  return { data: data.filter(i => i._id === id)[0] };
+};
 export const getStoreList = () => get('/store');
 export const getStoreInfo = async (id) => {
   let {data} = await get('/storeInfo');

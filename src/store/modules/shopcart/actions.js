@@ -104,7 +104,7 @@ export default {
     return null;
   },
   async getStoreItem({ commit }, id) {
-    const { code, data } = await getStoreItem(id);
+    const { data } = await getStoreItem(id);
     function addId(arr) {
       let start = 0;
       let goods = [];
@@ -118,13 +118,10 @@ export default {
       });
       return goods;
     }
-    if (code === 0) {
-      Object.freeze(data);
-      const goods = addId(data.food_menu);
-      Object.freeze(goods);
-      commit(ADD_GOODS, goods);
-      return data;
-    }
-    return {};
+    const goods = addId(data.food_menu);
+    Object.freeze(data);
+    Object.freeze(goods);
+    commit(ADD_GOODS, goods);
+    return data;
   }
 };

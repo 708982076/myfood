@@ -17,7 +17,7 @@ export default {
   },
   async created() {
     const { id } = this.$route.query;
-    const { data, code } = await getStoreComment(id);
+    const { data } = await getStoreComment(id);
     const { labels, comments } = data;
     this.labels = labels;
     this.comments = comments;
