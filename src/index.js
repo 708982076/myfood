@@ -5,6 +5,7 @@ import router from './pages/router';
 import plugins from './plugins';
 import globalComponents from '@/common' 
 import 'lib/rem';
+import './mock';
 
 Vue.use(plugins);
 Vue.use(globalComponents);
