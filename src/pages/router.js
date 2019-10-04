@@ -13,7 +13,7 @@ import storeRoute from "./Store/route";
 import City from './City/City';
 import Home from './Home/Home';
 import Search from './Search/Search';
-import ErrorView from './ErrorView/ErrorView';
+import ErrorView from './Error/Error';
 
 Vue.use(Router);
 
