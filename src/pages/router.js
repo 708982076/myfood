@@ -1,14 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
 import storeRoute from "./Store/route";
-const City = () =>
-  import(/* webpackChunkName: "City" */ "./City/City");
-const Home = () =>
-  import(/* webpackChunkName: "Home" */ "./Home/Home");
-const Search = () =>
-  import(/* webpackChunkName: "Search" */ "./Search/Search");
-const ErrorView = () =>
-  import(/* webpackChunkName: "Error" */ "./Error/Error");
+// const City = () =>
+//   import(/* webpackChunkName: "City" */ "./City/City");
+// const Home = () =>
+//   import(/* webpackChunkName: "Home" */ "./Home/Home");
+// const Search = () =>
+//   import(/* webpackChunkName: "Search" */ "./Search/Search");
+// const ErrorView = () =>
+//   import(/* webpackChunkName: "Error" */ "./Error/Error");
+
+import City from './City/City';
+import Home from './Home/Home';
+import Search from './Search/Search';
+import ErrorView from './ErrorView/ErrorView';
 
 Vue.use(Router);
 

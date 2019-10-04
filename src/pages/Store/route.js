@@ -1,7 +1,12 @@
-let Store = () => import(/* webpackChunkName: "Store" */ './Store');
-let Goods = () => import(/* webpackChunkName: "Goods" */'./Goods');
-let Comment = () => import(/* webpackChunkName: "Comment" */'./Comment');
-let ShopDetail = () => import(/* webpackChunkName: "ShopDetail" */'./ShopDetail');
+// let Store = () => import(/* webpackChunkName: "Store" */ './Store');
+// let Goods = () => import(/* webpackChunkName: "Goods" */'./Goods');
+// let Comment = () => import(/* webpackChunkName: "Comment" */'./Comment');
+// let ShopDetail = () => import(/* webpackChunkName: "ShopDetail" */'./ShopDetail');
+
+import Store from './Store';
+import Goods from './Goods';
+import Comment from './Comment';
+import ShopDetail from './ShopDetail';
 
 export default {
   path: "/store",
