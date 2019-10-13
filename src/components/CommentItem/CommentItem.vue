@@ -19,7 +19,7 @@
             :key="pic.smallPicUrl"
           >
             <el-image
-              :src="pic.smallPicUrl" 
+              :src="pic.smallPicUrl"
               :preview-src-list="cmt.pictures.map(e => e.bigPicUrl)">
             </el-image>
           </li>
@@ -65,9 +65,6 @@ export default {
     height: 50px;
     margin-right: 20px;
   }
-  &__item {
-    line-height: 14px;
-  }
   &__id {
     font-size: 16px;
     font-weight: bold;
@@ -94,8 +91,10 @@ export default {
   }
   &__img {
     overflow: hidden;
-    .el-icon-circle-close {
-      color: rgba(255,255,255,.8);
+    .el-image-viewer__btn {
+      i {
+        color: #fff
+      };
     }
     li {
       float: left;
@@ -105,8 +104,7 @@ export default {
       margin-bottom: 5px;
       overflow: hidden;
       img {
-        width: 100%;
-        height: 100%;
+        min-width: 100%;
       }
     }
   }

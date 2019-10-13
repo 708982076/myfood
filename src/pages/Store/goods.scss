@@ -7,6 +7,9 @@
   display: flex;
   padding-bottom: 50px;
   background-color: $white;
+  &__placeHold {
+    font-size: 64px;
+  }
   .goods-left {
     width: 80px;
     background-color: #f3f5f7;

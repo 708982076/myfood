@@ -21,7 +21,13 @@
           <ul class="goods-wrap">
             <li v-for="food in item.foods" :key="food.id" class="goods-item">
               <div class="image-wrap">
-                <el-image :src="food.image" lazy></el-image>
+                <el-image :src="food.image" lazy>
+                  <template #placeholder>
+                    <div class="goods__placeHold">
+                      <i class="el-icon-picture-outline"></i>
+                    </div>
+                  </template>
+                </el-image>
               </div>
               <div class="goods-info">
                 <div class="title">{{food.name}}</div>
