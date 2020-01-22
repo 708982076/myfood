@@ -1,4 +1,3 @@
-export const UPDATE_SHOP_CART = 'UPDATE_SHOP_CART';
-export const CHANGE_FOOD_ID = 'CHANGE_FOOD_ID';
-export const ADD_FOOD_NUM_ID = 'ADD_FOOD_NUM_ID';
-export const ADD_GOODS = 'ADD_GOODS';
+export const ADD_SHOPCART = 'ADD_SHOPCART'
+export const RM_SHOPCART = 'RM_SHOPCART'
+export const CLEAR_SHOPCART = 'CLEAR_SHOPCART'

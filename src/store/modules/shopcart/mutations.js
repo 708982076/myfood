@@ -1,21 +1,24 @@
-import {
-  CHANGE_FOOD_ID,
-  ADD_FOOD_NUM_ID,
-  ADD_GOODS,
-  UPDATE_SHOP_CART
-} from "./mutation-types";
+import Vue from 'vue';
+import {ADD_SHOPCART, RM_SHOPCART, CLEAR_SHOPCART} from './mutation-types';
 
 export default {
-  [UPDATE_SHOP_CART](state, shopingCartIdObj = {}) {
-    state.shopingCartIdObj = shopingCartIdObj;
+  [ADD_SHOPCART](state, {id, food}) {
+    if (!state.shopCart[id]) {
+      Vue.set(state.shopCart, id, {
+        food,
+        count: 1
+      })
+    }else {
+      state.shopCart[id].count++;
+    }
   },
-  [CHANGE_FOOD_ID](state, foodId) {
-    state.foodId = foodId;
+  [RM_SHOPCART](state, id) {
+    state.shopCart[id].count--;
+    if (!state.shopCart[id].count) {
+      Vue.delete( state.shopCart, id )
+    }
   },
-  [ADD_FOOD_NUM_ID](state, data) {
-    state.foodCountItems = data;
-  },
-  [ADD_GOODS](state, goods){
-    state.goods = goods;
+  [CLEAR_SHOPCART](state) {
+    state.shopCart = {}
   }
-};
+}

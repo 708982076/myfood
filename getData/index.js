@@ -4,18 +4,25 @@ import {baseURL} from 'root/config';
 let instance = create({baseURL})
 const {get} = instance;
 instance.interceptors.response.use((res) => {
-  let {message, code} = res.data;
-  if (code == 0) {
-    return res.data;
-  }else {
-    return Promise.reject(message);
-  }
+  return res.data;
 }); 
 
 export const getAllCity = () => get('/city');
 export const getLocation = (query) => get('/location', {params: {query}});
 export const getStoreItem = (id) => get('/storeItem', { params: {id} });
-export const getStoreList = () => get('/store');
-export const getStoreInfo = (id) => get('/storeinfo', { params: {id} });
-export const getStoreComment = (id) => get('/storecomment', { params: {id} });
+export const getStoreList = (id) => {
+  return id ? 
+    get('/store').then((res) => res.find(food => food.id == id))
+      : get('/store')
+};
+export const getStoreInfo = (id) => {
+  return id ? 
+    get('/storeinfo').then((res) => res.find(food => food.id == id))
+      : get('/storeinfo')
+};
+export const getStoreComment = (id) => {
+  return id ? 
+    get('/storecomment').then(res => res.find(food => food.id == id)) 
+      : get('/storecomment');
+};
 export const storeWordSerach = (keyword) => get('/storeWordSerach', { params: {keyword} });

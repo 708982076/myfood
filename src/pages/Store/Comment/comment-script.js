@@ -1,6 +1,5 @@
 import Star from "@/components/Star/Star";
 import { getStoreComment } from "root/getData";
-import { debounce } from 'lib/utils';
 import CommentLabel from "@/components/CommentLabel/CommentLabel";
 import CommentItem from "@/components/CommentItem/CommentItem";
 export default {
@@ -17,8 +16,7 @@ export default {
   },
   async created() {
     const { id } = this.$route.query;
-    const { data, code } = await getStoreComment(id);
-    const { labels, comments } = data;
+    const { labels, comments } = await getStoreComment(id);
     this.labels = labels;
     this.comments = comments;
   },

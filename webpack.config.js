@@ -8,6 +8,7 @@ const mergeConfig = require(`./config/webpack.${_mode}.js`);
 const webpackMerge = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const route = require('./getData/route');
 
 const webpackConfig = {
   optimization: {
@@ -29,7 +30,10 @@ const webpackConfig = {
   devServer: {
     port: 8000,
     open:true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    before(app){
+      route(app)
+    }
   },
   module: {
     rules: [

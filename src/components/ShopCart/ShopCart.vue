@@ -2,57 +2,57 @@
   <div class="shopcart">
     <div class="content">
       <div class="content-left">
-        <el-badge :value="cartCount" class="cart" :hidden="cartCount === 0"
-           :class="{ light: cartCount > 0 }"
-        >
-          <i class="el-icon-shopping-cart-2 cart-icon" @click="toggleShow"></i>
+        <el-badge class="cart" 
+          :value="shopCartCount" 
+          :hidden="!shopCartCount" 
+          :class="{light: shopCartCount}"
+          @click.native="openList">
+          <i class="el-icon-shopping-cart-2 cart-icon"></i>
         </el-badge>
         <div class="prices">
-          <span class="price" :class="{ light: shopcartPricetotal > 0 }">￥{{ shopcartPricetotal }}</span>
+          <span class="price">￥{{shopCartPrice}}</span>
           <span
             class="freight"
-            :class="{ remove: payPass }"
-          >另需配送费￥{{ payPass ? 0 : deliveryPrice }}元</span>
+          >配送费￥{{minPrice}}元</span>
         </div>
       </div>
       <div class="content-right">
         <div
           class="buy"
-          :class="{ light: payPass }"
-          @click="payhandle"
-        >{{ payPass ? '支付' : '还差￥' + _sum( minPrice - shopcartPricetotal, 1 ) + '起送' }}</div>
+          :class="{light:payPass}"
+          @click="pay"
+        >{{payPass ? `支付` : `还差￥${ minPrice - shopCartPrice }起送`}}</div>
       </div>
     </div>
-    <div class="list" :class="{ move: isShow }">
+    <div class="list" :class="{move: showCount}">
       <div class="list-header">
         <span class="title">购物车</span>
-        <span class="clear" @click="clearShopCartActions">清空</span>
+        <span class="clear" @click="clearCart">清空</span>
       </div>
-      <div class="list-content" ref="listContent">
+      <div class="list-content">
         <ul>
-          <li class="list-item" v-for="food in curShopcart" :key="food.id">
-            <span class="food-name">{{ food.name }}</span>
+          <li class="list-item" v-for="({food}) in shopCart" :key="food.id">
+            <span class="food-name">{{food.name}}</span>
             <div class="food-price">
-              <span class="price">￥{{ food.price }}</span>
-              <CartControl :id="food.id"></CartControl>
+              <span class="price">￥{{food.price}}</span>
+              <CartControl :food="food"/>
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="bg-mask" v-if="isShow" @click="isShow = false"></div>
   </div>
 </template>
 
 <script>
 import CartControl from "../CartControl/CartControl";
-import BS from "better-scroll";
 import { sum } from "../../lib/utils";
 
+import { CLEAR_SHOPCART } from '@/store/modules/shopcart/mutation-types';
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions, mapGetters } = createNamespacedHelpers(
-  "shopcart"
-);
+const { 
+  mapState, mapGetters, mapMutations 
+} = createNamespacedHelpers("shopcart");
 
 export default {
   components: {
@@ -68,61 +68,40 @@ export default {
       default: 0
     }
   },
+  data() {
+    return {
+      isShow: false
+    }
+  },
   methods: {
-    ...mapActions(["clearShopCart"]),
-    toggleShow() {
-      if (this.cartCount === 0) {
-        return;
-      }
+    ...mapMutations([CLEAR_SHOPCART]),
+    openList() {
       this.isShow = !this.isShow;
     },
-    clearShopCartActions() {
-      this.clearShopCart();
+    clearCart() {
+      this.CLEAR_SHOPCART();
       this.isShow = false;
     },
-    payhandle() {
-      if (!this.payPass) return;
-      this.curShopcart.forEach((f, index) => {
-        console.log(index + 1 + ".", f.name, f.count, f.price);
-      });
-      console.log("total:", this.shopcartPricetotal, 'count', this.shopcartCount);
-    },
-    _sum(...args) {
-      return sum(...args);
+    pay() {
+      console.log(Object.values(this.shopCart))
+      for (const {food: {name}, food, count} of Object.values(this.shopCart)) {
+        console.log(name, food, count);
+      }
+      console.log('total: ', this.shopCartPrice)
     }
   },
   computed: {
-    ...mapState(["shopCart", "shopingCartIdObj"]),
-    ...mapGetters(["shopcartPricetotal", "shopcartCount", "curShopcart"]),
-    cartCount() {
-      const len = this.curShopcart.length;
-      if (this.shopCartLen !== len) {
-        if (len === 0) this.isShow = false;
-        this.shopCartLen = len; 
-        this.$nextTick(() => {
-          this.sroller.refresh();
-        });
-      }
-      return this.shopcartCount;
-    },
+    ...mapGetters(["shopCartCount", "shopCartPrice"]),
+    ...mapState(['shopCart']),
     payPass() {
-      return this.shopcartPricetotal >= this.minPrice && this.shopcartCount !== 0;
+      return this.minPrice - this.shopCartPrice <= 0
+    },
+    showCount() {
+      if (!this.shopCartCount) {
+        this.isShow = false;
+      }
+      return this.isShow && this.shopCartCount
     }
-  },
-  data() {
-    return {
-      isShow: false,
-      sroller: BS,
-      shopCartLen: 0
-    };
-  },
-  mounted() {
-    this.sroller = new BS(this.$refs.listContent, {
-      click: true
-    });
-  },
-  beforeDestroy() {
-    this.sroller.destroy();
   }
 };
 </script>
@@ -258,9 +237,9 @@ export default {
       }
     }
     .list-content {
-      min-height: 200px;
       max-height: 200px;
-      overflow: hidden;
+      min-height: 200px;
+      overflow: auto;
       .list-item {
         display: flex;
         height: 48px;

@@ -1,56 +1,43 @@
 <template>
   <div class="cart-control">
     <transition name="move">
-      <span class="cart-control-btn decrease" v-if="data.count > 0">
-        <i class="el-icon-minus" @click="decreaseCount"></i>
+      <span class="cart-control-btn decrease" @click="decreaseCount" v-if="foodCount">
+        <i class="el-icon-minus"></i>
       </span>
     </transition>
-    <span class="num" v-if="data.count > 0">{{data.count}}</span>
-    <span class="cart-control-btn">
-      <i class="el-icon-plus add" @click="addCart"></i>
+    <span class="num">{{foodCount}}</span>
+    <span class="cart-control-btn" @click="increaseCount">
+      <i class="el-icon-plus add"></i>
     </span>
   </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("shopcart");
-
+import {ADD_SHOPCART, RM_SHOPCART} from '@/store/modules/shopcart/mutation-types';
+const { mapState, mapMutations } = createNamespacedHelpers("shopcart");
 export default {
   props: {
-    id: {
-      type: Number,
+    food: {
+      type: Object,
       required: true
     }
   },
-  data() {
-    return {
-      data: {
-        id: 0,
-        count: 0
-      }
-    };
-  },
-  async created() {
-    this.data.id = this.id;
-    const data = await this.updateFoodItemCount(this.data);
-    if (data) {
-      this.data = data;
-    }
-  },  
   computed: {
-    ...mapState(["foodCountItems"])
+    ...mapState(['shopCart']),
+    foodCount() {
+      const id = this.food.id;
+      return this.shopCart[id] && this.shopCart[id].count;
+    }
   },
   methods: {
-    ...mapActions(["addShopCart", "removeShopCart", "updateFoodItemCount", 'clearCache']),
-    addCart() {
-      this.data.count++;
-      this.addShopCart(this.data);
-    },
+    ...mapMutations([ADD_SHOPCART, RM_SHOPCART]),
     decreaseCount() {
-      if (this.data.count === 0) return;
-      this.data.count--;
-      this.removeShopCart(this.data);
+      if (!this.foodCount) return; 
+      this.RM_SHOPCART(this.food.id)
+    },
+    increaseCount() {
+      this.ADD_SHOPCART({ id: this.food.id, food: this.food })
     }
   }
 };

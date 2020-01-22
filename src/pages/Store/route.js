@@ -1,6 +1,6 @@
 let Store = () => import(/* webpackChunkName: "Store" */ './Store');
-let Goods = () => import(/* webpackChunkName: "Goods" */'./Goods');
-let Comment = () => import(/* webpackChunkName: "Comment" */'./Comment');
+let Goods = () => import(/* webpackChunkName: "Goods" */'./Goods/Goods');
+let Comment = () => import(/* webpackChunkName: "Comment" */'./Comment/Comment');
 let ShopDetail = () => import(/* webpackChunkName: "ShopDetail" */'./ShopDetail');
 
 export default {

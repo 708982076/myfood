@@ -4,7 +4,7 @@
       <template #mid>
         <router-link to="/city" class="loc-link">
           <i class="el-icon-location icon-fff"></i>
-          <span class="loc-name">{{ currentCity.name }}</span>
+          <!-- <span class="loc-name">{{ currentCity.name }}</span> -->
         </router-link>
       </template>
       <template #right>
@@ -21,8 +21,8 @@
 import Header from "@/components/Header/Header";
 import ShopList from "@/components/ShopList/ShopList";
 import { getStoreList } from "root/getData";
-import { mapState, mapActions } from "vuex";
-import { cookieUtils, removeStorage } from "lib/utils";
+// import { mapState, mapActions } from "vuex";
+// import { cookieUtils, removeStorage } from "lib/utils";
 export default {
   components: {
     Header,
@@ -35,26 +35,18 @@ export default {
     };
   },
   async created() {
-    const { pinyin, id } = this.$route.params;
-    if (pinyin && id) {
-      removeStorage("currentCity", { type: "session" });
-    }
-    const [storeList] = await Promise.all([
-      getStoreList(),
-      this.getPositionAction(this.$route.params)
-    ]);
-    this.storeList = Object.freeze(storeList.data);
-    this.$router.replace(`/home/${this.currentCity.pinyin}`).catch(e => e);
+    const storeList = await getStoreList()
+    this.storeList = storeList;
   },
   mounted() {
     this.loading = false;
   },
-  computed: {
-    ...mapState(["currentCity"])
-  },
-  methods: {
-    ...mapActions(["getPositionAction"])
-  }
+  // computed: {
+  //   ...mapState(["currentCity"])
+  // },
+  // methods: {
+  //   ...mapActions(["getPositionAction"])
+  // }
 };
 </script>
 <style lang="scss">

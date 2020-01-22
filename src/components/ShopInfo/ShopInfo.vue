@@ -1,6 +1,6 @@
 <template>
   <div class="shop-info">
-    <router-link clsss="shop-wrapper" :to="{ path: '/store', query:{ id: store._id } }">
+    <router-link clsss="shop-wrapper" :to="{ path: '/store', query:{ id: store.id } }">
       <div class="avatar">
         <el-image :src="store.avatar"></el-image>
       </div>

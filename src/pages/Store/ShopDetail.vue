@@ -73,10 +73,7 @@ export default {
   },
   async created() {
     const {id} = this.$route.query;
-    const {data, code} = await getStoreInfo(id);
-    if (code === 0) {
-      this.info = data;
-    }
+    this.info = await getStoreInfo(id);;
   },
   computed: {
     serTime() {

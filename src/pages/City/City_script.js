@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import { getStorage, setStorage } from "lib/utils";
-import { getHotCity, getAllCity, getLocation } from "root/getData";
-import { mapState, mapActions } from "vuex";
+import { getAllCity } from "root/getData";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -12,14 +12,10 @@ export default {
       hotCityList: [],
       recentCityList: getStorage("recentCityList") || [],
       allCityList: [],
-      flag: false,
-      doms: [],
-      allwrapH: [],
-      buttontop: false
+      flag: false
     };
   },
   methods: {
-    ...mapActions(["getPositionAction"]),
     handleClick(e) {
       if (!this.flag) {
         return;
@@ -75,7 +71,6 @@ export default {
     }
   },
   async created() {
-    this.getPositionAction().then(() => (this.flag = true));
     let hotCity, allCity;
 
     if (!getStorage("city")) {

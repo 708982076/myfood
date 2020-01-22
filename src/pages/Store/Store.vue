@@ -26,6 +26,7 @@
 <script>
 import GoodsHeader from "@/components/GoodsHeader/GoodsHeader";
 import {createNamespacedHelpers} from 'vuex';
+import {getStoreList} from 'root/getData'
 const { mapActions } = createNamespacedHelpers('shopcart');
 
 export default {
@@ -35,27 +36,18 @@ export default {
   data() {
     return {
       storeItem: {},
-      Goods: [],
-      id: '',
-      slidename: '',
-      loading: true
+      slidename: ''
     }
-  },
-  methods: {
-    ...mapActions(['setFoodId', 'getStoreItem', 'init', 'clearCache'])
   },
   async created() {
     const id = this.id = this.$route.query.id;
     if ( !id ) {
       this.$router.replace( { path: '/error' } );
     }else {
-      this.storeItem = await this.getStoreItem(id);
-      this.setFoodId(id);
-      this.loading = true;
+      const storeItem = await getStoreList(id);
+      console.log(storeItem)
+      this.storeItem = storeItem;
     }
-  },
-  destroyed() {
-    this.clearCache();
   },
   watch: {
     '$route'(n, o) {

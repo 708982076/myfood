@@ -2,7 +2,7 @@
   <div class="shop-list">
     <h2 class="title">—— 附近商家 ——</h2>
     <div v-infinite-scroll="loadNewStoreList" class="shop-infolist">
-      <ShopInfo :store="store" v-for="store in storeListData" :key="store._key"></ShopInfo>
+      <ShopInfo :store="store" v-for="store in newStoreList" :key="store.key"></ShopInfo>
       <p v-if="loading" class="loading-icon">
         <i class="el-icon-loading icon-midsize"></i>
       </p>
@@ -12,7 +12,6 @@
 
 <script>
 import ShopInfo from '../ShopInfo/ShopInfo';
-import {getStoreList} from 'root/getData';
 export default {
   props: {
     storeList: {
@@ -22,11 +21,14 @@ export default {
   },
   data() {
     return {
-      newStoreList: [],
-      loading: false
+      loading: false,
+      newStoreList: []
     }
   },
   methods: {
+    moreList() {
+      return this.storeList
+    },
     loadNewStoreList() {
       this.loading = true;
       if (this.timer) {
@@ -35,13 +37,8 @@ export default {
       this.timer = setTimeout(() => {
         this.timer = null;
         this.loading = false;
-        this.newStoreList = this.newStoreList.concat(this.storeListData.slice(0, 5));
-      }, 1000)
-    }
-  },
-  computed: {
-    storeListData() {
-      return [].concat(this.newStoreList, this.storeList);
+        this.newStoreList = this.newStoreList.concat( this.moreList() );
+      }, 500)
     }
   },
   components: {
