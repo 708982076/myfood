@@ -4,7 +4,7 @@
       <template #mid>
         <router-link to="/city" class="loc-link">
           <i class="el-icon-location icon-fff"></i>
-          <!-- <span class="loc-name">{{ currentCity.name }}</span> -->
+          <span class="loc-name">信阳</span>
         </router-link>
       </template>
       <template #right>
@@ -21,8 +21,6 @@
 import Header from "@/components/Header/Header";
 import ShopList from "@/components/ShopList/ShopList";
 import { getStoreList } from "root/getData";
-// import { mapState, mapActions } from "vuex";
-// import { cookieUtils, removeStorage } from "lib/utils";
 export default {
   components: {
     Header,
@@ -40,13 +38,7 @@ export default {
   },
   mounted() {
     this.loading = false;
-  },
-  // computed: {
-  //   ...mapState(["currentCity"])
-  // },
-  // methods: {
-  //   ...mapActions(["getPositionAction"])
-  // }
+  }
 };
 </script>
 <style lang="scss">

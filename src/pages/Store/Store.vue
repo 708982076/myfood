@@ -45,7 +45,6 @@ export default {
       this.$router.replace( { path: '/error' } );
     }else {
       const storeItem = await getStoreList(id);
-      console.log(storeItem)
       this.storeItem = storeItem;
     }
   },
