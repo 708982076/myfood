@@ -26,7 +26,7 @@ export default {
     SeachList
   },
   async created() {
-    const {data} = await getStoreList();
+    const data = await getStoreList();
     this.guesslike_stores = Object.freeze(data);
     this.nearby_stores = data.slice().reverse();
   },
@@ -59,7 +59,10 @@ export default {
   watch: {
     q: {
       handler: debounce(async function(n) {
-        const {data} = await storeWordSerach(encodeURIComponent(n));
+        if (!n) {
+          return ;
+        }
+        const data = await storeWordSerach(encodeURIComponent(n));
         this.name = "seach";
         this.search_stores = Object.freeze(data);
       }, 500)

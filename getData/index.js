@@ -8,21 +8,14 @@ instance.interceptors.response.use((res) => {
 }); 
 
 export const getAllCity = () => get('/city');
-export const getLocation = (query) => get('/location', {params: {query}});
 export const getStoreItem = (id) => get('/storeItem', { params: {id} });
 export const getStoreList = (id) => {
-  return id ? 
-    get('/store').then((res) => res.find(food => food.id == id))
-      : get('/store')
+  return get('/store', { params: {id} })
 };
 export const getStoreInfo = (id) => {
-  return id ? 
-    get('/storeinfo').then((res) => res.find(food => food.id == id))
-      : get('/storeinfo')
+  return get('/shopinfo', { params: {id} })
 };
 export const getStoreComment = (id) => {
-  return id ? 
-    get('/storecomment').then(res => res.find(food => food.id == id)) 
-      : get('/storecomment');
+  return get('/storecomment', { params: {id} });
 };
-export const storeWordSerach = (keyword) => get('/storeWordSerach', { params: {keyword} });
+export const storeWordSerach = (k) => get('/storekeyword', { params: {k} });

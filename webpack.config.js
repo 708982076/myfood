@@ -31,9 +31,9 @@ const webpackConfig = {
     port: 8000,
     open:true,
     historyApiFallback: true,
-    before(app){
-      route(app)
-    }
+    // before(app){
+    //   route(app)
+    // }
   },
   module: {
     rules: [
