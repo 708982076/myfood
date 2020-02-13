@@ -1,7 +1,7 @@
 import {create} from 'axios';
 import {baseURL} from 'root/config';
 
-let instance = create({baseURL})
+const instance = create({baseURL})
 const {get} = instance;
 instance.interceptors.response.use((res) => {
   return res.data;
