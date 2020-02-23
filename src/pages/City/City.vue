@@ -10,41 +10,22 @@
         </router-link>
       </template>
     </Header>
-    <div class="cityBox" @click="handleClick">
+    <div class="cityBox">
       <div class="location-city">
         定位城市：
         <router-link
           class="city-li-link--letter"
-          :to="routeParams(currentCity)"
+          to="/home"
           :data-pinyin="currentCity.pinyin"
           data-event="city"
         >信阳</router-link>
-      </div>
-      <div class="recent-city" v-show="recentCityList.length > 0">
-        <h4>最近访问</h4>
-        <section class="city-wrapper">
-          <el-row
-            class="city-li"
-            v-for="(recentCity, index) in cityList(recentCityList, 4)"
-            :key="index"
-          >
-            <el-col class="city-li-item" :span="6" v-for="city in recentCity" :key="city.id">
-              <router-link
-                :to="routeParams(city)"
-                :data-pinyin="city.pinyin"
-                data-event="city"
-                class="city-li-link"
-              >{{city.name}}</router-link>
-            </el-col>
-          </el-row>
-        </section>
       </div>
       <h4>热门城市</h4>
       <div class="hot-city city-wrapper">
         <el-row class="city-li" v-for="(hotCity, index) in cityList(hotCityList, 4)" :key="index">
           <el-col class="city-li-item" :span="6" v-for="city in hotCity" :key="city.name">
             <router-link
-              :to="routeParams(city)"
+              to="/home"
               :data-pinyin="city.pinyin"
               data-event="city"
               class="city-li-link"
@@ -80,7 +61,7 @@
               >
                 <el-col class="city-li-item" :span="6" v-for="city in itemCity" :key="city.id">
                   <router-link
-                    :to="routeParams(city)"
+                    to="/home"
                     :data-pinyin="city.pinyin"
                     data-event="city"
                     class="city-li-link"

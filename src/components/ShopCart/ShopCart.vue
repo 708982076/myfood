@@ -21,7 +21,7 @@
           class="buy"
           :class="{light:payPass}"
           @click="pay"
-        >{{payPass ? `支付` : `还差￥${ minPrice - shopCartPrice }起送`}}</div>
+        >{{payPass ? `支付` : `还差￥${ minPricePass }起送`}}</div>
       </div>
     </div>
     <div class="list" :class="{move: showCount}">
@@ -46,8 +46,6 @@
 
 <script>
 import CartControl from "../CartControl/CartControl";
-import { sum } from "../../lib/utils";
-
 import { CLEAR_SHOPCART } from '@/store/modules/shopcart/mutation-types';
 import { createNamespacedHelpers } from "vuex";
 const { 
@@ -93,8 +91,11 @@ export default {
   computed: {
     ...mapGetters(["shopCartCount", "shopCartPrice"]),
     ...mapState(['shopCart']),
+    minPricePass() {
+      return Number((this.minPrice - this.shopCartPrice).toFixed(2))
+    },
     payPass() {
-      return this.minPrice - this.shopCartPrice <= 0
+      return this.minPricePass <= 0;
     },
     showCount() {
       if (!this.shopCartCount) {

@@ -10,41 +10,9 @@ export default {
   data() {
     return {
       hotCityList: [],
-      recentCityList: getStorage("recentCityList") || [],
-      allCityList: [],
-      flag: false
+      recentCityList: [],
+      allCityList: []
     };
-  },
-  methods: {
-    handleClick(e) {
-      if (!this.flag) {
-        return;
-      }
-      const target = e.target,
-        targetData = target.dataset,
-        targetCont = target.textContent.trim();
-
-      if (targetData.event === "city") {
-        let flag = this.recentCityList.some(ele => ele.name === targetCont);
-        if (!flag) {
-          const pinyin = targetData.pinyin;
-          let firstLetter = pinyin.toUpperCase()[0];
-          this.recentCityList.push(
-            ...this.allCityList[firstLetter].filter(c => c.pinyin === pinyin)
-          );
-          setStorage("recentCityList", this.recentCityList);
-        }
-      }
-    },
-    routeParams({ pinyin, id }) {
-      return {
-        name: "home",
-        params: {
-          pinyin,
-          id
-        }
-      };
-    }
   },
   computed: {
     ...mapState(["currentCity"]),
@@ -71,16 +39,15 @@ export default {
     }
   },
   async created() {
-    let hotCity, allCity;
-
-    if (!getStorage("city")) {
-      const res = await getAllCity();
-      ({ hotCity, allCity } = res.data);
-      setStorage("city", res.data);
-    } else {
-      ({ hotCity, allCity } = getStorage("city"));
+    let data = getStorage("city");
+    if (!data) {
+      data = await getAllCity();
+      data.recentCity = [];
+      setStorage("city", data);
     }
-    this.hotCityList = Object.freeze(hotCity);
-    this.allCityList = Object.freeze(allCity);
+    
+    this.hotCityList = Object.freeze(data.hotCity);
+    this.allCityList = Object.freeze(data.allCity);
+    this.recentCityList = Object.freeze(data.recentCity);
   }
 };

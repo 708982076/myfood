@@ -20,7 +20,7 @@
           >
             <el-image
               :src="pic.smallPicUrl"
-              :preview-src-list="cmt.pictures.map(e => e.bigPicUrl)">
+              :preview-src-list="cmt.pictures.map(e => e.smallPicUrl)">
             </el-image>
           </li>
         </ul>

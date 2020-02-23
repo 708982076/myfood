@@ -27,7 +27,6 @@
 import GoodsHeader from "@/components/GoodsHeader/GoodsHeader";
 import {createNamespacedHelpers} from 'vuex';
 import {getStoreList} from 'root/getData'
-const { mapActions } = createNamespacedHelpers('shopcart');
 
 export default {
   components: {
@@ -47,6 +46,9 @@ export default {
       const storeItem = await getStoreList(id);
       this.storeItem = storeItem;
     }
+  },
+  destroyed() {
+    this.$store.commit(`shopcart/CLEAR_SHOPCART`);
   },
   watch: {
     '$route'(n, o) {

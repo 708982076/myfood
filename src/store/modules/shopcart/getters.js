@@ -14,6 +14,7 @@ export default {
     let price = 0;
     for (const id of foodsId) {
       price += shopCart[id].count * shopCart[id].food.price;
+      price = Number(price.toFixed(2));
     }
     return price;
   }

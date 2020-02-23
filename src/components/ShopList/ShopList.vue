@@ -1,7 +1,10 @@
 <template>
   <div class="shop-list">
     <h2 class="title">—— 附近商家 ——</h2>
-    <div v-infinite-scroll="loadNewStoreList" class="shop-infolist">
+    <div class="shop-infolist" 
+      v-infinite-scroll="loadNewStoreList" 
+      :infinite-scroll-disabled="loading"
+    >
       <ShopInfo :store="store" v-for="store in newStoreList" :key="store.key"></ShopInfo>
       <p v-if="loading" class="loading-icon">
         <i class="el-icon-loading icon-midsize"></i>
@@ -26,18 +29,11 @@ export default {
     }
   },
   methods: {
-    moreList() {
-      return this.storeList
-    },
     loadNewStoreList() {
-      this.loading = true;
-      if (this.timer) {
-        return ;
-      }
-      this.timer = setTimeout(() => {
-        this.timer = null;
-        this.loading = false;
-        this.newStoreList = this.newStoreList.concat( this.moreList() );
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.newStoreList = this.newStoreList.concat( this.storeList );
       }, 500)
     }
   },
