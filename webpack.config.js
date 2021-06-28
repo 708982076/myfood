@@ -55,23 +55,8 @@ const webpackConfig = {
             loader: 'url-loader',
             options: {
               name: '[name]-[hash:5].min.[ext]',
-              limit: 10000, //小于多少k转成base64
+              limit: 2048, //小于多少k转成base64
               outputPath: 'images/'
-            }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              // 压缩 jpg/jpeg 图片
-              mozjpeg: {
-                progressive: true,
-                quality: 65 // 压缩率
-              },
-              // 压缩 png 图片
-              pngquant: {
-                quality: '65-90',
-                speed: 4
-              }
             }
           }
         ]
